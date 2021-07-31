@@ -1,0 +1,14 @@
+{
+  "name": "bzcards",
+  "version": "1.0.0",
+  "description": "Store your business contacts in one place",
+  "main": "index.js",
+  "scripts": {
+    "build:css": "npx tailwindcss -i ./src/style.css -o ./dist/css/style.css"
+  },
+  "author": "Patricia Molnar",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^2.2.7"
+  }
+}
