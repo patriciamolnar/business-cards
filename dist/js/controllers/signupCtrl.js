@@ -1,6 +1,6 @@
-const signupCtrl = angular.module('signupCtrl', []); 
+const SignupCtrl = angular.module('SignupCtrl', []); 
 
-signupCtrl.controller('signupCtrl', function($scope) {
+SignupCtrl.controller('SignupCtrl', function($scope) {
   $scope.user = {
     firstname: '', 
     lastname: '',

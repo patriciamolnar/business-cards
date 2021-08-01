@@ -1,6 +1,6 @@
-const loginCtrl = angular.module('loginCtrl', []); 
+const LoginCtrl = angular.module('LoginCtrl', []); 
 
-loginCtrl.controller('loginCtrl', function($scope) {
+LoginCtrl.controller('LoginCtrl', function($scope) {
   $scope.loginCredentials = {
     email: '', 
     password: ''

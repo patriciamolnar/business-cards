@@ -1,5 +1,5 @@
-const homeCtrl = angular.module('homeCtrl', []); 
+const HomeCtrl = angular.module('HomeCtrl', []); 
 
-homeCtrl.controller('homeCtrl', function($scope) {
+HomeCtrl.controller('HomeCtrl', function($scope) {
   $scope.title = "BZCards"; 
 });

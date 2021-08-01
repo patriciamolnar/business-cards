@@ -1,18 +1,18 @@
-const myApp = angular.module('myApp', ['ngRoute', 'homeCtrl', 'loginCtrl', 'signupCtrl']); 
+const myApp = angular.module('myApp', ['ngRoute', 'HomeCtrl', 'LoginCtrl', 'SignupCtrl']); 
 
 myApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider
     .when('/', {
       templateUrl: 'views/home.html', 
-      controller: 'homeCtrl'
+      controller: 'HomeCtrl'
     })
     .when('/login', {
       templateUrl: 'views/login.html',  
-      controller: 'loginCtrl'
+      controller: 'LoginCtrl'
     })
     .when('/signup', {
       templateUrl: 'views/signup.html', 
-      controller: 'signupCtrl'
+      controller: 'SignupCtrl'
     })
     .otherwise({
       redirectTo: '/'
