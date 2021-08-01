@@ -1,3 +1,109 @@
 <div ng-controller="signupCtrl">
-  <h1>{{ title }}</h1>
+  <h1>Create an account</h1>
+
+  <form name="mySignup" novalidate>
+    <fieldset>
+      <!-- FIRSTNAME -->
+      <label for="signup-first">First Name *</label>
+      <input 
+        type="text" id="signup-first" name="firstname"
+        ng-model="user.firstname"
+        ng-required="true"
+        ng-minlength="2"
+        ng-pattern="stringRegex">
+
+      <!-- error: firstname missing -->
+      <p class="error"
+        ng-show="mySignup.firstname.$error.required && mySignup.firstname.$touched">
+        Please fill in your first name.
+      </p>
+
+      <!-- error: firstname too short -->
+      <p class="error"
+        ng-show="mySignup.firstname.$error.minlength && mySignup.firstname.$touched">
+        Your first name must be at least 2 characters long. 
+      </p>
+
+      <!-- error: firstname has invalid chars -->
+      <p class="error"
+        ng-show="mySignup.firstname.$error.pattern && mySignup.firstname.$touched">
+        The first name you entered contains invalid characters.  
+      </p>
+
+      <!-- LASTNAME -->
+      <label for="signup-last">Last Name *</label>
+      <input 
+        type="text" id="signup-last" name="lastname" 
+        ng-model="user.lastname"
+        ng-required="true"
+        ng-minlength="2"
+        ng-pattern="stringRegex">
+
+      <!-- error: lastname missing -->
+      <p class="error"
+        ng-show="mySignup.lastname.$error.required && mySignup.lastname.$touched">
+        Please fill in your last name.
+      </p>
+
+      <!-- error: lastname too short -->
+      <p class="error"
+        ng-show="mySignup.lastname.$error.minlength && mySignup.lastname.$touched">
+        Your last name must be at least 2 characters long. 
+      </p>
+
+      <!-- error: lastname has invalid chars -->
+      <p class="error"
+        ng-show="mySignup.lastname.$error.pattern && mySignup.lastname.$touched">
+        The last name you entered contains invalid characters.  
+      </p>
+
+      <!-- EMAIL -->
+      <label for="signup-email">Email *</label>
+      <input 
+        type="email" id="signup-email" name="email"
+        ng-model="user.email"
+        ng-required="true"
+        ng-pattern="emailRegex">
+
+      <!-- email missing -->  
+      <p class="error" 
+        ng-show="mySignup.email.$error.required && mySignup.email.$touched">
+        Please enter a valid email.
+      </p>
+      <!-- email incorrect format -->
+      <p class="error"
+        ng-show="mySignup.email.$error.pattern && mySignup.email.$touched">
+        The email you provided is not valid.
+      </p>
+
+      <!-- PASSWORD -->
+      <label for="signup-password">Password *</label>
+      <input 
+        type="password" id="signup-password" name="password"
+        ng-model="user.password"
+        ng-required="true"
+        ng-pattern="passwordRegex">
+      
+      <!-- password missing --> 
+      <p class="error" 
+        ng-show="mySignup.password.$error.required && mySignup.password.$touched">
+        Please enter a password.
+      </p>
+      <!-- password invalid-->
+      <p class="error"
+        ng-show="mySignup.password.$error.pattern && mySignup.password.$touched">
+        Please enter a valid password. <br /> 
+        Passwords need to: 
+        <ul ng-show="mySignup.password.$error.pattern && mySignup.password.$touched">
+          <li>Be at least 8 characters long.</li>
+          <li>Contain at least 1 uppercase character.</li>
+          <li>Contain at least 1 lowercase character.</li>
+          <li>Contain at least 1 number.</li>
+          <li>Contain at least 1 of the following special characters: !.@#$%^&*</li>
+        </ul>
+      </p>
+
+      <button type="submit">Sign Up</button>
+    </fieldset>
+  </form>
 </div>
