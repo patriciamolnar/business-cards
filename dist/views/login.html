@@ -1,3 +1,32 @@
 <div ng-controller="loginCtrl">
-  {{ title }}
+  <h1>Login</h1>
+
+  <form name="myLogin" novalidate>
+    <fieldset>
+      <!-- LOGIN EMAIL -->
+      <label for="login-email">Email:</label>
+      <input 
+        type="email" name="email" id="login-email"
+        ng-model="loginCredentials.email"
+        ng-required="true">
+      <!-- error: email missing -->
+      <p ng-show="myLogin.email.$invalid && myLogin.email.$touched">
+        Please fill in your account email.
+      </p>
+
+      <!-- LOGIN PASSWORD -->
+      <label for="login-password">Password:</label>
+      <input 
+        type="password" name="password" id="login-password"
+        ng-model="loginCredentials.password"
+        ng-required="true">
+
+      <!-- error: password missing -->
+      <p ng-show="myLogin.password.$invalid && myLogin.password.$touched">
+        Please provide your password.
+      </p>
+
+      <button type="submit">Login</button>
+    </fieldset> 
+  </form>
 </div>
