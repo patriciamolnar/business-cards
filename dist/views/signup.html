@@ -1,7 +1,7 @@
 <div ng-controller="SignupCtrl">
   <h1>Create an account</h1>
 
-  <form name="mySignup" novalidate>
+  <form name="mySignup" ng-submit="registerUser()" novalidate>
     <fieldset>
       <!-- FIRSTNAME -->
       <label for="signup-first">First Name *</label>
@@ -102,8 +102,7 @@
           <li>Contain at least 1 of the following special characters: !.@#$%^&*</li>
         </ul>
       </p>
-
-      <button type="submit">Sign Up</button>
     </fieldset>
+    <button type="submit">submit</button>
   </form>
 </div>
