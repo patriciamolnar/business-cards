@@ -10,7 +10,7 @@
       <!-- FIRSTNAME -->
       <label for="signup-first">First Name *</label>
       <input 
-        type="text" id="signup-first" name="firstname"
+        type="text" id="signup-first" name="firstname" autocomplete="given-name"
         ng-model="user.firstname"
         ng-required="true"
         ng-minlength="2"
@@ -39,7 +39,7 @@
       <!-- LASTNAME -->
       <label for="signup-last">Last Name *</label>
       <input 
-        type="text" id="signup-last" name="lastname" 
+        type="text" id="signup-last" name="lastname" autocomplete="family-name"
         ng-model="user.lastname"
         ng-required="true"
         ng-minlength="2"
@@ -68,7 +68,7 @@
       <!-- EMAIL -->
       <label for="signup-email">Email *</label>
       <input 
-        type="email" id="signup-email" name="email"
+        type="email" id="signup-email" name="email" autocomplete="email"
         ng-model="user.email"
         ng-required="true"
         ng-pattern="emailRegex">
@@ -89,7 +89,7 @@
       <!-- PASSWORD -->
       <label for="signup-password">Password *</label>
       <input 
-        type="password" id="signup-password" name="password"
+        type="password" id="signup-password" name="password" autocomplete="new-password"
         ng-model="user.password"
         ng-required="true"
         ng-pattern="passwordRegex">
