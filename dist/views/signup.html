@@ -1,6 +1,10 @@
 <div ng-controller="SignupCtrl">
   <h1>Create an account</h1>
 
+  <p id="general-error" ng-show="result.errors.includes('taken')">
+    Your email has already been taken. 
+  </p>
+
   <form name="mySignup" ng-submit="registerUser()" novalidate>
     <fieldset>
       <!-- FIRSTNAME -->
@@ -26,8 +30,10 @@
 
       <!-- error: firstname has invalid chars -->
       <p class="error"
-        ng-show="mySignup.firstname.$error.pattern && mySignup.firstname.$touched">
-        The first name you entered contains invalid characters.  
+        ng-show="mySignup.firstname.$error.pattern 
+          && mySignup.firstname.$touched
+          || result.errors.includes('firstname')">
+        The first name you entered is invalid.  
       </p>
 
       <!-- LASTNAME -->
@@ -53,8 +59,10 @@
 
       <!-- error: lastname has invalid chars -->
       <p class="error"
-        ng-show="mySignup.lastname.$error.pattern && mySignup.lastname.$touched">
-        The last name you entered contains invalid characters.  
+        ng-show="mySignup.lastname.$error.pattern 
+          && mySignup.lastname.$touched
+          || result.errors.includes('lastname')">
+        The last name you entered is invalid.  
       </p>
 
       <!-- EMAIL -->
@@ -72,7 +80,9 @@
       </p>
       <!-- email incorrect format -->
       <p class="error"
-        ng-show="mySignup.email.$error.pattern && mySignup.email.$touched">
+        ng-show="mySignup.email.$error.pattern 
+          && mySignup.email.$touched
+          || result.errors.includes('email')">
         The email you provided is not valid.
       </p>
 
@@ -91,10 +101,15 @@
       </p>
       <!-- password invalid-->
       <p class="error"
-        ng-show="mySignup.password.$error.pattern && mySignup.password.$touched">
+        ng-show="mySignup.password.$error.pattern 
+          && mySignup.password.$touched
+          || result.errors.includes('password')">
         Please enter a valid password. <br /> 
         Passwords need to: 
-        <ul ng-show="mySignup.password.$error.pattern && mySignup.password.$touched">
+        <ul 
+          ng-show="mySignup.password.$error.pattern 
+            && mySignup.password.$touched
+            || result.errors.includes('password')">
           <li>Be at least 8 characters long.</li>
           <li>Contain at least 1 uppercase character.</li>
           <li>Contain at least 1 lowercase character.</li>

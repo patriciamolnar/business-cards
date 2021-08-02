@@ -31,7 +31,7 @@ SignupCtrl.controller('SignupCtrl', function($scope, $http) {
     })
     .catch(function(error) {
       $scope.status = error.status; 
-      console.log('Status: ' + $scope.status);
+      console.log($scope.status);
       throw error;
     });
   }
