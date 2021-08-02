@@ -1,8 +1,12 @@
 <div ng-controller="SignupCtrl">
   <h1>Create an account</h1>
 
-  <p id="general-error" ng-show="result.errors.includes('taken')">
-    Your email has already been taken. 
+  <p ng-show="result.errors.includes('taken')">
+    Your email has already been taken. Please <a href="#!/login">login</a> to continue. 
+  </p>
+
+  <p ng-show="result.success === true">
+    Success! Please <a href="#!/login">login</a>.
   </p>
 
   <form name="mySignup" ng-submit="registerUser()" novalidate>
