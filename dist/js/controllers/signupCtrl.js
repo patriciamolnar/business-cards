@@ -26,7 +26,7 @@ SignupCtrl.controller('SignupCtrl', function($scope, $http) {
     })
     .then(function(response) {
       $scope.result = response.data; 
-      console.log('Result: ' + $scope.result);
+      console.log($scope.result);
       return response.data;
     })
     .catch(function(error) {
