@@ -1,6 +1,14 @@
 <div ng-controller="LoginCtrl">
   <h1>Login</h1>
 
+  <p ng-show="result.errors === 'blank'">
+    Please fill in all fields.
+  </p>
+
+  <p ng-show="result.errors === 'incorrect'">
+    Email or password incorrect. Please try again. 
+  </p>
+
   <form name="myLogin" ng-submit="loginUser()" novalidate>
     <fieldset>
       <!-- LOGIN EMAIL -->

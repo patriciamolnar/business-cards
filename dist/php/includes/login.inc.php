@@ -29,7 +29,7 @@ if(!request_is_post()) {
   if(!$user) {
     echo json_encode([
       'success' => false, 
-      'errors' => 'nouser'
+      'errors' => 'incorrect'
     ]);
 
     exit(); 
