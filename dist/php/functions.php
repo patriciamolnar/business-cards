@@ -37,6 +37,20 @@ function check_detail_taken($column, $value) {
   return $row['result']; 
 }
 
+//get details of user
+function get_account_info($column, $detail, $value) {
+  require 'includes/connect.inc.php'; 
+  $sql = 'SELECT ' . $column . ' 
+          FROM users
+          WHERE ' . $detail . ' = :value;';
+  $stmt = $db->prepare($sql);
+  $stmt->bindParam(':value', $value);
+  $stmt->execute();
+  $row = $stmt->fetch(PDO::FETCH_ASSOC); 
+  return $row; 
+}
+
+
 // ACCOUNT 
 
 //register user 

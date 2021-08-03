@@ -1,7 +1,7 @@
 <div ng-controller="LoginCtrl">
   <h1>Login</h1>
 
-  <form name="myLogin" novalidate>
+  <form name="myLogin" ng-submit="loginUser()" novalidate>
     <fieldset>
       <!-- LOGIN EMAIL -->
       <label for="login-email">Email:</label>
