@@ -30,7 +30,7 @@ myApp.config(['$routeProvider', function($routeProvider) {
     });
 }]);
 
-myApp.controller('AppCtrl', function($rootScope, $localStorage) {
+myApp.controller('AppCtrl', function($scope, $rootScope, $location, $localStorage) {
   $rootScope.initLocalStorage = function() {
     $rootScope.localStorage = $localStorage;
     $rootScope.loggedIn = $rootScope.localStorage.loggedIn;
@@ -40,4 +40,9 @@ myApp.controller('AppCtrl', function($rootScope, $localStorage) {
   }  
 
   $rootScope.initLocalStorage();
+
+  $scope.logout = function() {
+    $rootScope.localStorage.loggedIn = false;
+    $location.path('/'); 
+  }
 }); 

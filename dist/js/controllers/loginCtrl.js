@@ -21,7 +21,6 @@ LoginCtrl.controller('LoginCtrl', function($scope, $http, $location, $rootScope)
       $scope.result = response.data; 
       $rootScope.localStorage.loggedIn = true; 
       $location.path('/dashboard');
-      console.log($scope.result);
       return response.data;
     })
     .catch(function(error) {
