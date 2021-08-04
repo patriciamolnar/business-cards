@@ -15,9 +15,21 @@ myApp.config(['$routeProvider', function($routeProvider) {
       controller: 'SignupCtrl'
     })
     .when('/dashboard', {
-      templateUrl: 'views/dashboard.html'
+      templateUrl: 'views/dashboard.html',
+      resolve: {
+        'check': function($location, $rootScope) {
+          console.log($rootScope); 
+          if(!$rootScope.loggedIn) {
+            $location.path('/login'); 
+          }
+        }
+      }
     }) 
     .otherwise({
       redirectTo: '/'
     });
 }]);
+
+myApp.controller('AppCtrl', function($rootScope) {
+  $rootScope.loggedIn = false; 
+}); 
