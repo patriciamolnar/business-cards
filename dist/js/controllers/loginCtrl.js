@@ -1,6 +1,6 @@
 const LoginCtrl = angular.module('LoginCtrl', []); 
 
-LoginCtrl.controller('LoginCtrl', function($scope, $http) {
+LoginCtrl.controller('LoginCtrl', function($scope, $http, $location) {
   $scope.loginCredentials = {
     email: '', 
     password: ''
@@ -17,6 +17,7 @@ LoginCtrl.controller('LoginCtrl', function($scope, $http) {
     })
     .then(function(response) {
       $scope.result = response.data; 
+      $location.path('/dashboard');
       console.log($scope.result);
       return response.data;
     })
