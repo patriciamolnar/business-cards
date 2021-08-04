@@ -1,4 +1,4 @@
-const myApp = angular.module('myApp', ['ngRoute', 'HomeCtrl', 'LoginCtrl', 'SignupCtrl']); 
+const myApp = angular.module('myApp', ['ngRoute', 'ngStorage', 'HomeCtrl', 'LoginCtrl', 'SignupCtrl']); 
 
 myApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider
@@ -17,7 +17,7 @@ myApp.config(['$routeProvider', function($routeProvider) {
     .when('/dashboard', {
       templateUrl: 'views/dashboard.html',
       resolve: {
-        'check': function($location, $rootScope) {
+        'checkLoggedIn': function($location, $rootScope) {
           console.log($rootScope); 
           if(!$rootScope.loggedIn) {
             $location.path('/login'); 
@@ -30,6 +30,14 @@ myApp.config(['$routeProvider', function($routeProvider) {
     });
 }]);
 
-myApp.controller('AppCtrl', function($rootScope) {
-  $rootScope.loggedIn = false; 
+myApp.controller('AppCtrl', function($rootScope, $localStorage) {
+  $rootScope.initLocalStorage = function() {
+    $rootScope.localStorage = $localStorage;
+    $rootScope.loggedIn = $rootScope.localStorage.loggedIn;
+    if($rootScope.loggedIn === undefined) {
+      $rootScope.loggedIn = false; 
+    }
+  }  
+
+  $rootScope.initLocalStorage();
 }); 

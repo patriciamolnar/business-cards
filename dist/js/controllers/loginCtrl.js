@@ -1,6 +1,8 @@
 const LoginCtrl = angular.module('LoginCtrl', []); 
 
 LoginCtrl.controller('LoginCtrl', function($scope, $http, $location, $rootScope) {
+  $rootScope.initLocalStorage(); 
+
   $scope.loginCredentials = {
     email: '', 
     password: ''
@@ -17,7 +19,7 @@ LoginCtrl.controller('LoginCtrl', function($scope, $http, $location, $rootScope)
     })
     .then(function(response) {
       $scope.result = response.data; 
-      $rootScope.loggedIn = true; 
+      $rootScope.localStorage.loggedIn = true; 
       $location.path('/dashboard');
       console.log($scope.result);
       return response.data;
