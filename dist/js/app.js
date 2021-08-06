@@ -18,8 +18,7 @@ myApp.config(['$routeProvider', function($routeProvider) {
       templateUrl: 'views/dashboard.html',
       resolve: {
         'checkLoggedIn': function($location, $rootScope) {
-          console.log($rootScope); 
-          if(!$rootScope.loggedIn) {
+          if(!$rootScope.$storage.loggedIn) {
             $location.path('/login'); 
           }
         }
@@ -31,18 +30,12 @@ myApp.config(['$routeProvider', function($routeProvider) {
 }]);
 
 myApp.controller('AppCtrl', function($scope, $rootScope, $location, $localStorage) {
-  $rootScope.initLocalStorage = function() {
-    $rootScope.localStorage = $localStorage;
-    $rootScope.loggedIn = $rootScope.localStorage.loggedIn;
-    if($rootScope.loggedIn === undefined) {
-      $rootScope.loggedIn = false; 
-    }
-  }  
+  $rootScope.$storage = $localStorage; 
+  
+  $localStorage.loggedIn = false; 
 
-  $rootScope.initLocalStorage();
-
-  $scope.logout = function() {
-    $rootScope.localStorage.loggedIn = false;
+  $scope.logoutUser = function() {
+    $localStorage.loggedIn = false; 
     $location.path('/'); 
   }
 }); 
