@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="myApp" ng-controller="AppCtrl">
 <head>
+  <base href="/bzcards/dist/">
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,11 +27,11 @@
 </head>
 <body class="font-quicksand">
   <header>
-    <a href="#!/">BZ</a>
+    <a href="/">BZ</a>
     <nav>
-      <a href="#!/login" ng-hide="$storage.loggedIn">Login</a>
-      <a href="#!/signup" ng-hide="$storage.loggedIn">Sign Up</a>
-      <a href="#!/dashboard" ng-show="$storage.loggedIn">Dashboard</a>
+      <a href="login" ng-hide="$storage.loggedIn">Login</a>
+      <a href="signup" ng-hide="$storage.loggedIn">Sign Up</a>
+      <a href="dashboard" ng-show="$storage.loggedIn">Dashboard</a>
       <button ng-click="logoutUser()" ng-show="$storage.loggedIn">logout</button>
 
      Status: {{ $storage.loggedIn }}
