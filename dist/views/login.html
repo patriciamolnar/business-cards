@@ -14,7 +14,7 @@
       <!-- LOGIN EMAIL -->
       <label for="login-email">Email:</label>
       <input 
-        type="email" name="email" id="login-email"
+        type="email" name="email" id="login-email" autocomplete="email"
         ng-model="loginCredentials.email"
         ng-required="true">
       <!-- error: email missing -->
@@ -25,7 +25,7 @@
       <!-- LOGIN PASSWORD -->
       <label for="login-password">Password:</label>
       <input 
-        type="password" name="password" id="login-password"
+        type="password" name="password" id="login-password" autocomplete="current-password"
         ng-model="loginCredentials.password"
         ng-required="true">
 
