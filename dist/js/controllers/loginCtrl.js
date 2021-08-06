@@ -18,8 +18,14 @@ LoginCtrl.controller('LoginCtrl', function($scope, $http, $location, $localStora
     })
     .then(function(response) {
       $scope.result = response.data; 
-      $localStorage.loggedIn = true; 
-      $location.path('/dashboard');
+      $localStorage.loggedIn = true; //log user in
+
+      //save details to local storage
+      $localStorage.firstname = $scope.result.user.firstname;
+      $localStorage.lastname = $scope.result.user.lastname; 
+      $localStorage.email = $scope.result.user.email; 
+
+      $location.path('/dashboard'); //redirect to dashboard
       return response.data;
     })
     .catch(function(error) {
