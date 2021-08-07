@@ -1,8 +1,24 @@
 <div ng-controller="AccountCtrl">
   <h1>Update Your Profile</h1>
 
-  <p ng-show="errors.length > 0">
-    <p ng-repeat="error in errors">{{error}}</p>
+  <p ng-show="errors.includes('password')">
+    Please provide your password to save your changes.
+  </p>
+
+  <p ng-show="result.errors.includes('incorrect')">
+    Incorrect password provided. Please try again.
+  </p>
+
+  <p ng-show="result.errors.includes('noemail') || result.errors.includes('sql')">
+    Unknown error. Please try again later or contact info@pmcoding.co.uk.
+  </p>
+
+  <p ng-show="result.errors.includes('nochange')">
+    No information was changed. 
+  </p>
+
+  <p class="success-message" ng-show="result.success">
+    Your changes have been saved successfully.
   </p>
 
   <form name="myAccount" ng-submit="updateAccount()" novalidate>

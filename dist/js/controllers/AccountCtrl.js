@@ -1,6 +1,6 @@
 const AccountCtrl = angular.module('AccountCtrl', []); 
 
-AccountCtrl.controller('AccountCtrl', function($scope, $rootScope, validationService, $http) {
+AccountCtrl.controller('AccountCtrl', function($scope, $rootScope, validationService, $http, $localStorage) {
   $scope.regex = {
     email: validationService.getEmailRegex(),
     string: validationService.getStringRegex(),
@@ -67,7 +67,7 @@ AccountCtrl.controller('AccountCtrl', function($scope, $rootScope, validationSer
   $scope.updateAccount = function() {
     //check if password has been provided.
     if(!$scope.password.trim()) {
-      $scope.errors.push('Please provide your password to save the changes'); 
+      $scope.errors.push('password'); 
       return; 
     }
   
@@ -90,7 +90,16 @@ AccountCtrl.controller('AccountCtrl', function($scope, $rootScope, validationSer
         }
       })
       .then(function(response) {
-        console.log(response.data);
+        $scope.result = response.data;
+
+        //save updated details to localStorage
+        $localStorage.user = {
+          firstname: $scope.result.user.firstname, 
+          lastname: $scope.result.user.lastname, 
+          email: $scope.result.user.email
+        };
+
+        return response.data;
       })
       .catch(function(error) {
         console.log(error);  

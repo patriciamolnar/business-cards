@@ -22,7 +22,7 @@ if(!request_is_post()) {
   if(empty(trim($originalEmail))) { 
     echo json_encode([
       'success' => false, 
-      'errors' => 'blank'
+      'errors' => 'noemail'
     ]);
     exit(); 
   }
@@ -32,7 +32,7 @@ if(!request_is_post()) {
   if(!$user) {
     echo json_encode([
       'success' => false, 
-      'errors' => 'incorrect'
+      'errors' => 'noemail'
     ]);
 
     exit(); 
