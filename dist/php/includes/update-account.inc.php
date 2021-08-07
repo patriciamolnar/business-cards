@@ -14,25 +14,25 @@ if(!request_is_post()) {
 
   $firstname = $dataArr['core']['firstname'] ?? null;
   $lastname = $dataArr['core']['lastname'] ?? null;
-  $originalEmail = $dataArr['originalEmail'] ?? null; 
+  $id = $dataArr['id'] ?? null; 
   $newEmail = $dataArr['core']['email'] ?? null; 
   $password = $dataArr['password'] ?? null; 
 
   //check if original email from localstorage was sent on
-  if(empty(trim($originalEmail))) { 
+  if(empty(trim($id))) { 
     echo json_encode([
       'success' => false, 
-      'errors' => 'noemail'
+      'errors' => 'noid'
     ]);
     exit(); 
   }
 
   //check if there is a user with email
-  $user = get_account_info('*', 'email', $originalEmail);
+  $user = get_account_info('*', 'id', $id);
   if(!$user) {
     echo json_encode([
       'success' => false, 
-      'errors' => 'noemail'
+      'errors' => 'noid'
     ]);
 
     exit(); 
@@ -58,9 +58,9 @@ if(!request_is_post()) {
       $q[] = "email = :newEmail";
     }
     if(sizeof($q) > 0) { //check if we have any updates otherwise don't execute
-        $sql = "UPDATE users SET " . implode(", ", $q) . " WHERE email= :originalEmail";
+        $sql = "UPDATE users SET " . implode(", ", $q) . " WHERE id= :id";
         $stmt = $db->prepare($sql);
-        $stmt->bindParam(":originalEmail", $originalEmail);
+        $stmt->bindParam(":id", $id);
 
         if(!empty(trim($firstname))) {
           $stmt->bindParam(":firstname", $firstname);
@@ -80,6 +80,7 @@ if(!request_is_post()) {
             'success' => true, 
             'errors' => '',
             'user' => array(
+              'id' => $id, 
               'firstname' => $firstname ?? $user['firstname'],
               'lastname' => $lastname ?? $user['lastname'], 
               'email' => $newEmail ?? $user['email']

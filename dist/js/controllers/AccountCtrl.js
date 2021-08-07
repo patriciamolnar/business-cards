@@ -71,7 +71,7 @@ AccountCtrl.controller('AccountCtrl', function($scope, $rootScope, validationSer
       return; 
     }
   
-    //check if any of the core values have changed. 
+    //CORE VALUES: check if any of the mandatory values have changed. 
     const coreDetails = {};
     for (const [key, value] of Object.entries($scope.user.core)) {
       if(value !== u[key]) {
@@ -84,7 +84,7 @@ AccountCtrl.controller('AccountCtrl', function($scope, $rootScope, validationSer
         url: 'php/includes/update-account.inc.php',
         method: 'POST', 
         data: {
-          originalEmail: u.email, //for account validation send original email and passw.
+          id: u.id,
           password: $scope.password, 
           core: coreDetails
         }
@@ -94,10 +94,13 @@ AccountCtrl.controller('AccountCtrl', function($scope, $rootScope, validationSer
 
         //save updated details to localStorage
         $localStorage.user = {
+          id: $scope.result.user.id,
           firstname: $scope.result.user.firstname, 
           lastname: $scope.result.user.lastname, 
           email: $scope.result.user.email
         };
+
+        $scope.errors = []; 
 
         return response.data;
       })
@@ -106,5 +109,8 @@ AccountCtrl.controller('AccountCtrl', function($scope, $rootScope, validationSer
         throw error;
       })
     }
+
+    //ADDITIONAL VALUES
+
   }
 }); 

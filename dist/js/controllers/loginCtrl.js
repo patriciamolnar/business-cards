@@ -22,6 +22,7 @@ LoginCtrl.controller('LoginCtrl', function($scope, $http, $location, $localStora
 
       //save details to local storage
       $localStorage.user = {
+        id: $scope.result.user.id, 
         firstname: $scope.result.user.firstname, 
         lastname: $scope.result.user.lastname, 
         email: $scope.result.user.email
