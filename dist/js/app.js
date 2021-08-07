@@ -1,8 +1,8 @@
-const myApp = angular.module('myApp', ['ngRoute', 'ngStorage', 'HomeCtrl', 'LoginCtrl', 'SignupCtrl']); 
+const myApp = angular.module('myApp', ['ngRoute', 'ngStorage', 'HomeCtrl', 'LoginCtrl', 'SignupCtrl', 'AccountCtrl']); 
 
 myApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
-  $locationProvider.html5Mode(true);
-  $locationProvider.hashPrefix('');
+  // $locationProvider.html5Mode(true);
+  // $locationProvider.hashPrefix('');
 
   $routeProvider
     .when('/', {
@@ -26,7 +26,11 @@ myApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $l
           }
         }
       }
-    }) 
+    })
+    .when('/account', {
+      templateUrl: 'views/account.html',
+      controller: 'AccountCtrl'
+    })
     .otherwise({
       redirectTo: '/'
     });
@@ -40,5 +44,42 @@ myApp.controller('AppCtrl', function($scope, $rootScope, $location, $localStorag
   $scope.logoutUser = function() {
     $localStorage.loggedIn = false; 
     $location.path('/'); 
+  }
+}); 
+
+//Service containing all the regexes for form data validation
+myApp.service('validationService', function() {
+  const emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i; 
+
+  const stringRegex = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/; 
+
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*\.])(?=.{8,})/;
+
+  const urlRegex = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&\/=]*)/; 
+
+  const textRegex = /^[a-zA-Z0-9àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð€\$£\"+@=_()*&^!?#;{}\/|\[\] ,.'-]+$/;
+
+  this.getEmailRegex = function() {
+    return emailRegex;
+  }
+
+  this.getStringRegex = function() {
+    return stringRegex;
+  }
+
+  this.getPasswordRegex = function() {
+    return passwordRegex;
+  }
+
+  this.getUrlRegex = function() {
+    return urlRegex;
+  }
+
+  this.getTextRegex = function() {
+    return textRegex; 
+  }
+
+  this.getPhoneRegex = function() {
+    return /\d{5,}/; 
   }
 }); 
