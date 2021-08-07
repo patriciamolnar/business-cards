@@ -21,10 +21,12 @@ LoginCtrl.controller('LoginCtrl', function($scope, $http, $location, $localStora
       $localStorage.loggedIn = true; //log user in
 
       //save details to local storage
-      $localStorage.firstname = $scope.result.user.firstname;
-      $localStorage.lastname = $scope.result.user.lastname; 
-      $localStorage.email = $scope.result.user.email; 
-
+      $localStorage.user = {
+        firstname: $scope.result.user.firstname, 
+        lastname: $scope.result.user.lastname, 
+        email: $scope.result.user.email
+      };
+    
       $location.path('/dashboard'); //redirect to dashboard
       return response.data;
     })

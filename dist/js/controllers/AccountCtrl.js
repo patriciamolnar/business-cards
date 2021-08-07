@@ -38,20 +38,22 @@ AccountCtrl.controller('AccountCtrl', function($scope, $rootScope, validationSer
     'Other'
   ];
 
+  const u = $rootScope.$storage.user;
+
   $scope.user = {
-    firstname: $rootScope.$storage.firstname ?? '', 
-    lastname: $rootScope.$storage.lastname ?? '', 
-    jobtitle: $rootScope.$storage.jobtitle ?? '',
-    description: $rootScope.$storage.description ?? '',
-    sector: $rootScope.$storage.sector ?? '',
-    office: $rootScope.$storage.office ?? '', 
-    mobile: $rootScope.$storage.mobile ?? '', 
-    email: $rootScope.$storage.email ?? '',  
-    website: $rootScope.$storage.website ?? '',  
+    firstname: u.firstname ?? '', 
+    lastname: u.lastname ?? '', 
+    jobtitle: u.jobtitle ?? '',
+    description: u.description ?? '',
+    sector: u.sector ?? '',
+    office: u.office ?? '', 
+    mobile: u.mobile ?? '', 
+    email: u.email ?? '',  
+    website: u.website ?? '',  
     social: {
-      twitter: $rootScope.$storage.twitter ?? '', 
-      instagram: $rootScope.$storage.instagram ?? '', 
-      facebook: $rootScope.$storage.facebook ?? ''
+      twitter: u.twitter ?? '', 
+      instagram: u.instagram ?? '', 
+      facebook: u.facebook ?? ''
     }
   }
 }); 

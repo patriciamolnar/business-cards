@@ -43,6 +43,7 @@ myApp.controller('AppCtrl', function($scope, $rootScope, $location, $localStorag
 
   $scope.logoutUser = function() {
     $localStorage.loggedIn = false; 
+    $localStorage.user = {}; 
     $location.path('/'); 
   }
 }); 
