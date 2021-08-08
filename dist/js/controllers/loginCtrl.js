@@ -18,21 +18,22 @@ LoginCtrl.controller('LoginCtrl', function($scope, $http, $location, $localStora
     })
     .then(function(response) {
       $scope.result = response.data; 
-      $localStorage.loggedIn = true; //log user in
 
-      console.log($scope.result); 
-      console.log($localStorage.user);
+      if(response.data.errors === '') { //only log in user if there is no error
+        $localStorage.loggedIn = true; 
 
-      //save details to local storage
-      for (const [key, value] of Object.entries($scope.result.user)) {
-        if(key === 'mobile' || key === 'office') {
-          $localStorage.user[key] = parseInt(value, 10); 
-        } else {
-          $localStorage.user[key] = value;
+        //save details to local storage
+        for (const [key, value] of Object.entries($scope.result.user)) {
+          if(key === 'mobile' || key === 'office') {
+            $localStorage.user[key] = parseInt(value, 10); 
+          } else {
+            $localStorage.user[key] = value;
+          }
         }
+      
+        $location.path('/dashboard'); //redirect to dashboard
       }
-    
-      $location.path('/dashboard'); //redirect to dashboard
+      
       return response.data;
     })
     .catch(function(error) {
