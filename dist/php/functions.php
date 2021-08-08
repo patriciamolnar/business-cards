@@ -50,6 +50,18 @@ function get_account_info($column, $detail, $value) {
   return $row; 
 }
 
+function get_userdata($email) {
+  require 'includes/connect.inc.php'; 
+  $sql = 'SELECT * FROM users
+          LEFT JOIN details ON users.id = details.uid
+          WHERE email = :email';
+  $stmt = $db->prepare($sql);
+  $stmt->bindParam(':email', $email);
+  $stmt->execute();
+  $row = $stmt->fetch(PDO::FETCH_ASSOC); 
+  return $row;
+}
+
 
 // ACCOUNT 
 

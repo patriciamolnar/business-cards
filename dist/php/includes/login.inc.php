@@ -25,7 +25,7 @@ if(!request_is_post()) {
   }
 
   //check if there is a user with email
-  $user = get_account_info('*', 'email', $email);
+  $user = get_userdata($email);
   if(!$user) {
     echo json_encode([
       'success' => false, 
@@ -47,12 +47,7 @@ if(!request_is_post()) {
     echo json_encode([
       'success' => true, 
       'errors' => '',
-      'user' => [
-        'firstname' => $user['firstname'],
-        'lastname' => $user['lastname'], 
-        'email' => $user['email'], 
-        'id' => $user['id']
-      ]
+      'user' => $user
     ]);
   }
 }
