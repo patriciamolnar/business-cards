@@ -21,6 +21,7 @@ LoginCtrl.controller('LoginCtrl', function($scope, $http, $location, $localStora
 
       if(response.data.errors === '') { //only log in user if there is no error
         $localStorage.loggedIn = true; 
+        $localStorage.user = {}; 
 
         //save details to local storage
         for (const [key, value] of Object.entries($scope.result.user)) {
