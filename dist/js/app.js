@@ -60,6 +60,8 @@ myApp.service('validationService', function() {
 
   const textRegex = /^[a-zA-Z0-9àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð€\$£\"+@=_()*&^!?#;{}\/|\[\] ,.'-]+$/;
 
+  const phoneRegex = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/;
+
   this.getEmailRegex = function() {
     return emailRegex;
   }
@@ -81,6 +83,6 @@ myApp.service('validationService', function() {
   }
 
   this.getPhoneRegex = function() {
-    return /\d{5,}/; 
+    return phoneRegex; 
   }
 }); 

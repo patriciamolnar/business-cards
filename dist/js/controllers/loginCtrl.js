@@ -24,11 +24,7 @@ LoginCtrl.controller('LoginCtrl', function($scope, $http, $location, $localStora
 
         //save details to local storage
         for (const [key, value] of Object.entries($scope.result.user)) {
-          if(key === 'mobile' || key === 'office') {
-            $localStorage.user[key] = parseInt(value, 10); 
-          } else {
-            $localStorage.user[key] = value;
-          }
+          $localStorage.user[key] = value; 
         }
       
         $location.path('/dashboard'); //redirect to dashboard
