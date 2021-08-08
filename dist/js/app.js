@@ -39,7 +39,7 @@ myApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $l
 myApp.controller('AppCtrl', function($scope, $rootScope, $location, $localStorage) {
   $rootScope.$storage = $localStorage; 
   
-  $localStorage.loggedIn = false; 
+  $localStorage.loggedIn = $localStorage.loggedIn ?? false; 
 
   $scope.logoutUser = function() {
     $localStorage.loggedIn = false; 
