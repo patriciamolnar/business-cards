@@ -47,7 +47,21 @@ if(!request_is_post()) {
     echo json_encode([
       'success' => true, 
       'errors' => '',
-      'user' => $user
+      'user' => array(
+        'id' => $user['id'], 
+        'firstname' => $user['firstname'],
+        'lastname' => $user['lastname'],
+        'email' => $user['email'], 
+        'jobtitle' => $user['jobtitle'], 
+        'description' => $user['description'],
+        'sector' => $user['sector'],
+        'office' => $user['office'],
+        'mobile' => $user['mobile'],
+        'website' => $user['website'],
+        'twitter' => $user['twitter'],
+        'instagram' => $user['instagram'],
+        'facebook' => $user['facebook']
+      )
     ]);
   }
 }

@@ -52,9 +52,10 @@ function get_account_info($column, $detail, $value) {
 
 function get_userdata($email) {
   require 'includes/connect.inc.php'; 
-  $sql = 'SELECT * FROM users
+  $sql = 'SELECT users.*, details.jobtitle,  details.description, details.sector, details.office, details.mobile, details.website, details.twitter, details.instagram, details.facebook 
+          FROM users
           LEFT JOIN details ON users.id = details.uid
-          WHERE email = :email';
+          WHERE email = :email;';
   $stmt = $db->prepare($sql);
   $stmt->bindParam(':email', $email);
   $stmt->execute();
