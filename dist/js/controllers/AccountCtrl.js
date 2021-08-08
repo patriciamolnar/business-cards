@@ -93,12 +93,9 @@ AccountCtrl.controller('AccountCtrl', function($scope, $rootScope, validationSer
         $scope.result = response.data;
 
         //save updated details to localStorage
-        $localStorage.user = {
-          id: $scope.result.user.id,
-          firstname: $scope.result.user.firstname, 
-          lastname: $scope.result.user.lastname, 
-          email: $scope.result.user.email
-        };
+        for (const [key, value] of Object.entries($scope.result.user)) {
+          $localStorage.user[key] = value; 
+        }
 
         $scope.errors = []; 
 
