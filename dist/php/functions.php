@@ -38,10 +38,10 @@ function check_detail_taken($column, $value) {
 }
 
 //get details of user
-function get_account_info($column, $detail, $value) {
+function get_account_info($column, $table, $detail, $value) {
   require 'includes/connect.inc.php'; 
   $sql = 'SELECT ' . $column . ' 
-          FROM users
+          FROM ' . $table . '
           WHERE ' . $detail . ' = :value;';
   $stmt = $db->prepare($sql);
   $stmt->bindParam(':value', $value);
@@ -66,6 +66,7 @@ function get_userdata($email) {
 
 // ACCOUNT 
 
+//Table: `users`
 //register user 
 function register_user($firstname, $lastname, $email, $password) {
   require 'includes/connect.inc.php';
@@ -78,4 +79,43 @@ function register_user($firstname, $lastname, $email, $password) {
                   ':password' => password_hash($password, PASSWORD_DEFAULT));
   $stmt->execute($values);
   return $db->lastInsertId(); 
+}
+
+//Table `details`
+function update_details($id, $jobtitle, $description, $sector, $office, $mobile, $website, $twitter, $instagram, $facebook) {
+  require 'includes/connect.inc.php';
+  $sql = 'UPDATE `details`
+          SET `jobtitle` = :jobtitle, `description` = :description, sector = :sector, `office` = :office, `mobile` = :mobile, `website` = :website, `twitter` = :twitter, `instagram` = :instagram, `facebook` = :facebook
+          WHERE `uid` = :id;';
+  $stmt = $db->prepare($sql);
+  $values = array('id' => $id,
+                  ':jobtitle' => $jobtitle,
+                  ':description' => $description,
+                  ':sector' => $sector,
+                  ':office' => $office,
+                  ':mobile' => $mobile,
+                  ':website' => $website,
+                  ':twitter' => $twitter,
+                  ':instagram' => $instagram,
+                  ':facebook' => $facebook); 
+  return $stmt->execute($values);
+}
+
+function set_details($id, $jobtitle, $description, $sector, $office, $mobile, $website, $twitter, $instagram, $facebook) {
+  require 'includes/connect.inc.php';
+  $sql = 'INSERT INTO `details` (uid, jobtitle, description, sector, office, mobile, website, twitter, instagram, facebook)
+          VALUES (:jobtitle, :description, :sector, :office, :mobile, :website, :twitter, :instagram, :facebook)
+          WHERE `uid` = :id;';
+  $stmt = $db->prepare($sql);
+  $values = array(':id' => $id,
+                  ':jobtitle' => $jobtitle,
+                  ':description' => $description,
+                  ':sector' => $sector,
+                  ':office' => $office,
+                  ':mobile' => $mobile,
+                  ':website' => $website,
+                  ':twitter' => $twitter,
+                  ':instagram' => $instagram,
+                  ':facebook' => $facebook);
+  return $stmt->execute($values);
 }

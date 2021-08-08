@@ -42,20 +42,20 @@ AccountCtrl.controller('AccountCtrl', function($scope, $rootScope, validationSer
 
   $scope.user = {
     core: { //fields for `users` mySQL table
-      firstname: u.firstname ?? '', 
-      lastname: u.lastname ?? '', 
-      email: u.email ?? '',
+      firstname: u.firstname ?? null, 
+      lastname: u.lastname ?? null, 
+      email: u.email ?? null,
     },
     add: { //fields for `details` mySQL table
-      jobtitle: u.jobtitle ?? '',
-      description: u.description ?? '',
-      sector: u.sector ?? '',
-      office: u.office ?? '', 
-      mobile: u.mobile ?? '',   
-      website: u.website ?? '',
-      twitter: u.twitter ?? '', 
-      instagram: u.instagram ?? '', 
-      facebook: u.facebook ?? ''
+      jobtitle: u.jobtitle ?? null,
+      description: u.description ?? null,
+      sector: u.sector ?? null,
+      office: u.office ?? null, 
+      mobile: u.mobile ?? null,   
+      website: u.website ?? null,
+      twitter: u.twitter ?? null, 
+      instagram: u.instagram ?? null, 
+      facebook: u.facebook ?? null
     }, 
   }
 
@@ -71,7 +71,7 @@ AccountCtrl.controller('AccountCtrl', function($scope, $rootScope, validationSer
       return; 
     }
   
-    //CORE VALUES: check if any of the mandatory values have changed. 
+    //CORE VALUES: check if firstname/lastname/email have changed. 
     const coreDetails = {};
     for (const [key, value] of Object.entries($scope.user.core)) {
       if(value !== u[key]) {
@@ -108,6 +108,47 @@ AccountCtrl.controller('AccountCtrl', function($scope, $rootScope, validationSer
     }
 
     //ADDITIONAL VALUES
+    const addDetails = {};
+    console.log(u); 
+    console.log($scope.user.add);
 
+    for (const [key, value] of Object.entries($scope.user.add)) {
+      if(value !== u[key]) {
+        addDetails[key] = value;
+      }
+    }
+    console.log(addDetails); 
+
+    if(Object.keys(addDetails).length !== 0) { //details have changed, update DB
+      $http({
+        url: 'php/includes/update-details.inc.php',
+        method: 'POST', 
+        data: {
+          id: u.id,
+          password: $scope.password, 
+          details: addDetails
+        }
+      })
+      .then(function(response) {
+        $scope.result = response.data;
+        console.log($scope.result); 
+        //save updated details to localStorage
+        if($scope.result.success) {
+          for (const [key, value] of Object.entries($scope.result.user)) {
+            $localStorage.user[key] = value; 
+          }
+  
+          $scope.errors = []; 
+        }
+
+        console.log($localStorage.user); 
+
+        return response.data;
+      })
+      .catch(function(error) {
+        console.log(error);  
+        throw error;
+      })
+    }
   }
 }); 
