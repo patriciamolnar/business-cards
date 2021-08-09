@@ -1,6 +1,7 @@
 <div ng-controller="AccountCtrl">
   <h1>Update Your Profile</h1>
 
+  <!-- errors -->
   <p ng-show="errors.includes('password')">
     Please provide your password to save your changes.
   </p>
@@ -21,6 +22,7 @@
     Your changes have been saved successfully.
   </p>
 
+  <!-- FORM -->
   <form name="myAccount" ng-submit="updateAccount()" novalidate>
     <!-- FIRST NAME -->
     <label for="firstname">First Name</label>
@@ -78,7 +80,7 @@
 
     <!-- JOB TITLE -->
     <label for="jobtitle">Job Title</label>
-    <input type="text" id="jobtitle" name="jobtitle"
+    <input type="text" id="jobtitle" name="jobtitle" autocomplete="organization-title"
       ng-model="user.add.jobtitle"
       ng-pattern="regex.text"/>
 
@@ -107,7 +109,7 @@
 
     <!-- office -->
     <label for="office">Office</label>
-    <input type="text" name="office" id="office" 
+    <input type="text" name="office" id="office" autocomplete="tel"
       ng-model="user.add.office"
       ng-pattern="regex.phone" />
 
@@ -117,7 +119,7 @@
 
     <!-- mobile -->
     <label for="mobile">Mobile</label>
-    <input type="text" name="mobile" id="mobile" 
+    <input type="text" name="mobile" id="mobile" autocomplete="tel"
       ng-model="user.add.mobile"
       ng-pattern="regex.phone" />
     
@@ -127,7 +129,7 @@
 
     <!-- EMAIL -->
     <label for="email">Email</label>
-    <input type="email" name="email" id="email" 
+    <input type="email" name="email" id="email" autocomplete="email"
       ng-model="user.core.email"
       ng-required="true"
       ng-pattern="emailRegex" />
@@ -147,7 +149,7 @@
 
     <!-- WEBSITE -->
     <label for="website">Website</label>
-    <input type="text" name="website" id="website" 
+    <input type="text" name="website" id="website" autocomplete="url"
       ng-model="user.add.website"
       ng-pattern="regex.url" />
 
@@ -185,7 +187,7 @@
 
     <!-- PASSWORD -->
     <label for="password">Please verify your password to save your changes</label>
-    <input type="password" name="password" id="password" 
+    <input type="password" name="password" id="password" autocomplete="current-password"
       ng-model="password"
       ng-required="true" />
     
