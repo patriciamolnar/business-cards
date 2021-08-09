@@ -108,25 +108,23 @@ AccountCtrl.controller('AccountCtrl', function($scope, $rootScope, validationSer
     }
 
     //ADDITIONAL VALUES
-    const addDetails = {};
-    console.log(u); 
-    console.log($scope.user.add);
+    let detailsChanged = false;
 
     for (const [key, value] of Object.entries($scope.user.add)) {
-      if(value !== u[key]) {
-        addDetails[key] = value;
+      if(value !== u[key] || value !== null || value !== '') {
+        detailsChanged = true; 
+        break; 
       }
-    }
-    console.log(addDetails); 
+    } 
 
-    if(Object.keys(addDetails).length !== 0) { //details have changed, update DB
+    if(detailsChanged) { //details have changed, update DB
       $http({
         url: 'php/includes/update-details.inc.php',
         method: 'POST', 
         data: {
           id: u.id,
           password: $scope.password, 
-          details: addDetails
+          details: $scope.user.add
         }
       })
       .then(function(response) {
@@ -141,7 +139,7 @@ AccountCtrl.controller('AccountCtrl', function($scope, $rootScope, validationSer
           $scope.errors = []; 
         }
 
-        console.log($localStorage.user); 
+        // console.log($localStorage.user); 
 
         return response.data;
       })
