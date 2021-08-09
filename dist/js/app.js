@@ -31,6 +31,9 @@ myApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $l
       templateUrl: 'views/account.html',
       controller: 'AccountCtrl'
     })
+    .when('/profile', {
+      templateUrl: 'views/profile.html'
+    })
     .otherwise({
       redirectTo: '/'
     });
