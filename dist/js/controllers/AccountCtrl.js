@@ -68,6 +68,7 @@ AccountCtrl.controller('AccountCtrl', function($scope, $rootScope, validationSer
     //check if password has been provided.
     if(!$scope.password.trim()) {
       $scope.errors.push('password'); 
+      $scope.password = '';
       return; 
     }
   
@@ -129,7 +130,6 @@ AccountCtrl.controller('AccountCtrl', function($scope, $rootScope, validationSer
       })
       .then(function(response) {
         $scope.result = response.data;
-        console.log($scope.result); 
         //save updated details to localStorage
         if($scope.result.success) {
           for (const [key, value] of Object.entries($scope.result.user)) {
@@ -137,16 +137,18 @@ AccountCtrl.controller('AccountCtrl', function($scope, $rootScope, validationSer
           }
   
           $scope.errors = []; 
-        }
+        } 
 
-        // console.log($localStorage.user); 
-
+        $scope.password = ''; //update done, reset password
         return response.data;
       })
       .catch(function(error) {
+        $scope.password = '';
         console.log(error);  
         throw error;
       })
+    } else { //there are no changes, reset password
+      $scope.password = '';
     }
   }
 }); 
