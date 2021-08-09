@@ -104,8 +104,7 @@ function update_details($id, $jobtitle, $description, $sector, $office, $mobile,
 function set_details($id, $jobtitle, $description, $sector, $office, $mobile, $website, $twitter, $instagram, $facebook) {
   require 'includes/connect.inc.php';
   $sql = 'INSERT INTO `details` (uid, jobtitle, description, sector, office, mobile, website, twitter, instagram, facebook)
-          VALUES (:jobtitle, :description, :sector, :office, :mobile, :website, :twitter, :instagram, :facebook)
-          WHERE `uid` = :id;';
+          VALUES (:id, :jobtitle, :description, :sector, :office, :mobile, :website, :twitter, :instagram, :facebook);';
   $stmt = $db->prepare($sql);
   $values = array(':id' => $id,
                   ':jobtitle' => $jobtitle,
