@@ -1,7 +1,23 @@
 <div>
   <h1>Welcome {{$storage.user.firstname}} {{$storage.user.lastname}}!</h1>
-  <div>
-    <p>Search</p>
+  <div ng-controller="SearchCtrl">
+    <h2>Search</h2>
+    <form name="mySearch" ng-submit="searchUser()">
+      <label for="search">Search BZCards for contacts</label>
+      <input type="text" id="search" name="search" placeholder="Type an email..."
+        ng-model="searchTerm">
+      <button type="submit">Search</button>
+      <button type="reset" ng-click="resetSearch()">Reset</button>
+    </form>
+
+    <div ng-show="user">
+      <p>Your result for {{ searchTerm }}:</p>
+      <a href="#!/profile/{{user.id}}">{{user.firstname}} {{user.lastname}}</a>
+    </div>
+
+    <div ng-if="error === 'nouser'">
+      <p>There is no account with {{ searchTerm }}.</p>
+    </div>
   </div>
 
   <div>

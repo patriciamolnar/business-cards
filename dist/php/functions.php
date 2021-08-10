@@ -118,3 +118,14 @@ function set_details($id, $jobtitle, $description, $sector, $office, $mobile, $w
                   ':facebook' => $facebook);
   return $stmt->execute($values);
 }
+
+//search user 
+function search_user($key, $value) {
+  require 'includes/connect.inc.php';
+  $sql = 'SELECT * FROM users
+          WHERE ' . $key . ' = :value;'; 
+  $stmt = $db->prepare($sql);
+  $stmt->execute(array(':value' => $value));
+  $row = $stmt->fetch(PDO::FETCH_ASSOC); 
+  return $row;
+}
