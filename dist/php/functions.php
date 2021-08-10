@@ -82,6 +82,19 @@ function register_user($firstname, $lastname, $email, $password) {
 }
 
 //Table `details`
+function get_details($key, $value) {
+  require 'includes/connect.inc.php'; 
+  $sql = 'SELECT users.*, details.jobtitle,  details.description, details.sector, details.office, details.mobile, details.website, details.twitter, details.instagram, details.facebook 
+          FROM users
+          LEFT JOIN details ON users.id = details.uid
+          WHERE users.' . $key . ' = :value;';
+  $stmt = $db->prepare($sql);
+  $stmt->bindParam(':value', $value);
+  $stmt->execute();
+  $row = $stmt->fetch(PDO::FETCH_ASSOC); 
+  return $row;
+}
+
 function update_details($id, $jobtitle, $description, $sector, $office, $mobile, $website, $twitter, $instagram, $facebook) {
   require 'includes/connect.inc.php';
   $sql = 'UPDATE `details`
@@ -129,3 +142,4 @@ function search_user($key, $value) {
   $row = $stmt->fetch(PDO::FETCH_ASSOC); 
   return $row;
 }
+

@@ -1,0 +1,13 @@
+<div>
+  <div ng-hide="error === 'nouser'">
+    <h1>{{ user.firstname }} {{ user.lastname }}</h1>
+    <h2>{{ user.jobtitle }}</h2>
+    <p>{{ user.description }}</p>
+    <p>Sector: {{ user.sector }}</p>
+    <p>Email: {{ user.email }}</p>
+  </div>
+
+  <div ng-if="error === 'nouser'">
+    The user you are looking for doesn't exist. 
+  </div>
+</div>
