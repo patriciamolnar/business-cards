@@ -50,23 +50,8 @@ function get_account_info($column, $table, $detail, $value) {
   return $row; 
 }
 
-function get_userdata($email) {
-  require 'includes/connect.inc.php'; 
-  $sql = 'SELECT users.*, details.jobtitle,  details.description, details.sector, details.office, details.mobile, details.website, details.twitter, details.instagram, details.facebook 
-          FROM users
-          LEFT JOIN details ON users.id = details.uid
-          WHERE email = :email;';
-  $stmt = $db->prepare($sql);
-  $stmt->bindParam(':email', $email);
-  $stmt->execute();
-  $row = $stmt->fetch(PDO::FETCH_ASSOC); 
-  return $row;
-}
-
-
 // ACCOUNT 
 
-//Table: `users`
 //register user 
 function register_user($firstname, $lastname, $email, $password) {
   require 'includes/connect.inc.php';
@@ -81,7 +66,7 @@ function register_user($firstname, $lastname, $email, $password) {
   return $db->lastInsertId(); 
 }
 
-//Table `details`
+//get details from tables: users and details
 function get_details($key, $value) {
   require 'includes/connect.inc.php'; 
   $sql = 'SELECT users.*, details.jobtitle,  details.description, details.sector, details.office, details.mobile, details.website, details.twitter, details.instagram, details.facebook 
@@ -93,6 +78,24 @@ function get_details($key, $value) {
   $stmt->execute();
   $row = $stmt->fetch(PDO::FETCH_ASSOC); 
   return $row;
+}
+
+function set_details($id, $jobtitle, $description, $sector, $office, $mobile, $website, $twitter, $instagram, $facebook) {
+  require 'includes/connect.inc.php';
+  $sql = 'INSERT INTO `details` (uid, jobtitle, description, sector, office, mobile, website, twitter, instagram, facebook)
+          VALUES (:id, :jobtitle, :description, :sector, :office, :mobile, :website, :twitter, :instagram, :facebook);';
+  $stmt = $db->prepare($sql);
+  $values = array(':id' => $id,
+                  ':jobtitle' => $jobtitle,
+                  ':description' => $description,
+                  ':sector' => $sector,
+                  ':office' => $office,
+                  ':mobile' => $mobile,
+                  ':website' => $website,
+                  ':twitter' => $twitter,
+                  ':instagram' => $instagram,
+                  ':facebook' => $facebook);
+  return $stmt->execute($values);
 }
 
 function update_details($id, $jobtitle, $description, $sector, $office, $mobile, $website, $twitter, $instagram, $facebook) {
@@ -114,25 +117,7 @@ function update_details($id, $jobtitle, $description, $sector, $office, $mobile,
   return $stmt->execute($values);
 }
 
-function set_details($id, $jobtitle, $description, $sector, $office, $mobile, $website, $twitter, $instagram, $facebook) {
-  require 'includes/connect.inc.php';
-  $sql = 'INSERT INTO `details` (uid, jobtitle, description, sector, office, mobile, website, twitter, instagram, facebook)
-          VALUES (:id, :jobtitle, :description, :sector, :office, :mobile, :website, :twitter, :instagram, :facebook);';
-  $stmt = $db->prepare($sql);
-  $values = array(':id' => $id,
-                  ':jobtitle' => $jobtitle,
-                  ':description' => $description,
-                  ':sector' => $sector,
-                  ':office' => $office,
-                  ':mobile' => $mobile,
-                  ':website' => $website,
-                  ':twitter' => $twitter,
-                  ':instagram' => $instagram,
-                  ':facebook' => $facebook);
-  return $stmt->execute($values);
-}
-
-//search user 
+//search user from table: details 
 function search_user($key, $value) {
   require 'includes/connect.inc.php';
   $sql = 'SELECT * FROM users

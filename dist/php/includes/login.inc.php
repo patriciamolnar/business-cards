@@ -25,7 +25,7 @@ if(!request_is_post()) {
   }
 
   //check if there is a user with email
-  $user = get_userdata($email);
+  $user = get_details('email', $email);
   if(!$user) {
     echo json_encode([
       'success' => false, 
