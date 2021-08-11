@@ -128,11 +128,40 @@ function search_user($key, $value) {
   return $row;
 }
 
-//bookmark user
+//Save & Unsave Contacts
+
+//check if user is already a saved contact
+function check_if_saved($saved_user, $saved_by) {
+  require 'includes/connect.inc.php';
+  $sql = 'SELECT COUNT(*) as num
+          FROM contacts 
+          WHERE saved_user = :saved_user AND saved_by = :saved_by;'; 
+  $stmt = $db->prepare($sql);
+  $stmt->execute(array(
+    ':saved_user' => $saved_user,
+    ':saved_by' => $saved_by
+  ));
+  $row = $stmt->fetch(PDO::FETCH_ASSOC); 
+  return $row['num'];
+}
+
+//save contact
 function save_contact($saved_user, $saved_by) {
   require 'includes/connect.inc.php';
   $sql = 'INSERT INTO contacts (saved_user, saved_by)
           VALUES (:saved_user, :saved_by)'; 
+  $stmt = $db->prepare($sql);
+  return $stmt->execute(array(
+    ':saved_user' => $saved_user, 
+    ':saved_by' => $saved_by
+  ));
+}
+
+//unsave_contact
+function unsave_contact($saved_user, $saved_by) {
+  require 'includes/connect.inc.php';
+  $sql = 'DELETE FROM contacts
+          WHERE saved_user = :saved_user AND saved_by = :saved_by LIMIT 1'; 
   $stmt = $db->prepare($sql);
   return $stmt->execute(array(
     ':saved_user' => $saved_user, 
