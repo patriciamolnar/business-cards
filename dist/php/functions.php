@@ -128,3 +128,14 @@ function search_user($key, $value) {
   return $row;
 }
 
+//bookmark user
+function save_contact($saved_user, $saved_by) {
+  require 'includes/connect.inc.php';
+  $sql = 'INSERT INTO contacts (saved_user, saved_by)
+          VALUES (:saved_user, :saved_by)'; 
+  $stmt = $db->prepare($sql);
+  return $stmt->execute(array(
+    ':saved_user' => $saved_user, 
+    ':saved_by' => $saved_by
+  ));
+}

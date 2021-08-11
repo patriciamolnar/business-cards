@@ -1,5 +1,6 @@
 <div>
   <div ng-hide="error === 'nouser'">
+    <button ng-click="saveContact(user.id)">Save Contact</button>
     <h1>{{ user.firstname }} {{ user.lastname }}</h1>
     <h2>{{ user.jobtitle }}</h2>
     <p>{{ user.description }}</p>
