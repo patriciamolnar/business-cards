@@ -1,6 +1,10 @@
 <div>
   <div ng-hide="error === 'nouser'">
-    <button ng-click="saveContact(user.id)">Save Contact</button>
+    <p ng-if="error">
+      An error occurred. Please try again later or contact info@pmcoding.co.uk
+    </p>
+    
+    <button ng-click="saveContact(user.id)">{{ btnMessage }}</button>
     <h1>{{ user.firstname }} {{ user.lastname }}</h1>
     <h2>{{ user.jobtitle }}</h2>
     <p>{{ user.description }}</p>
