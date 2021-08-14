@@ -16,14 +16,14 @@
     <!-- Search -->
     <form>
       <label for="search-contacts">Search contacts</label>
-      <input type="text" id="search-contacts">
+      <input type="text" id="search-contacts" ng-model="searchTerm">
     </form>
 
     <!-- List all contacts -->
     <div>
       <p>People, who saved your contact details:</p>
       <div>
-        <a ng-repeat="follower in followers" href="#!/profile/{{follower.id}}" class="block">
+        <a ng-repeat="follower in followers | filter: searchTerm" href="#!/profile/{{follower.id}}" class="block">
           <span>{{follower.firstname}} {{follower.lastname}}</span>
           <span>{{follower.jobtitle}}</span>
           <span>{{follower.sector}}</span>
