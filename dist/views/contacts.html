@@ -1,14 +1,49 @@
 <div>
-  <!-- Search Exisiting Contacts -->
-  <form>
-    <label for="search-contacts">Search contacts</label>
-    <input type="text" id="search-contacts">
-  </form>
+  <!-- if user has no contacts & search -->
+  <h1>Your Contacts</h1>
+  <div ng-show="error === 'none'">
+    <p>You have no contacts saved yet. Search for one below.</p>
 
-  <!-- List all contacts -->
-  <a ng-repeat="contact in contacts" href="#!/profile/{{contact.id}}" class="block">
-    <span>{{contact.firstname}} {{contact.lastname}}</span>
-    <span>{{contact.jobtitle}}</span>
-    <span>{{contact.sector}}</span>
-  </a>
+    <div ng-controller="SearchCtrl">
+      <form name="mySearch" ng-submit="searchUser()">
+        <label for="search">Search BZCards for contacts</label>
+        <input type="text" id="search" name="search" placeholder="Type an email..."
+          ng-model="searchTerm">
+        <button type="submit">Search</button>
+        <button type="reset" ng-click="resetSearch()">Reset</button>
+      </form>
+  
+      <div ng-show="user">
+        <p>Your result for {{ searchTerm }}:</p>
+        <a href="#!/profile/{{user.id}}">{{user.firstname}} {{user.lastname}}</a>
+      </div>
+  
+      <div ng-if="error === 'nouser'">
+        <p>There is no account with {{ searchTerm }}.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- internal error -->
+  <div ng-show="error === 'internal'">
+    <p>An unknown error occurred. Please try again later or contact 
+      <a href="mailto:info@pmcoding.co.uk">info@pmcoding.co.uk</a>.
+    </p>
+  </div>
+
+  <!-- Search Exisiting Contacts -->
+  <div ng-show="contacts">
+    <p>People, whose contacts you saved: </p>
+    <form>
+      <label for="search-contacts">Search contacts</label>
+      <input type="text" id="search-contacts">
+    </form>
+
+    <!-- List all contacts -->
+    <a ng-repeat="contact in contacts" href="#!/profile/{{contact.id}}" class="block">
+      <span>{{contact.firstname}} {{contact.lastname}}</span>
+      <span>{{contact.jobtitle}}</span>
+      <span>{{contact.sector}}</span>
+    </a>
+  </div>
 </div>

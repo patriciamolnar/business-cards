@@ -1,16 +1,34 @@
 <div>
-  <h2>Your followers</h2>
-  <p>People, who saved your contact details:</p>
-  <!-- Search -->
-  <form>
-    <label for="search-contacts">Search contacts</label>
-    <input type="text" id="search-contacts">
-  </form>
+  <h1>Your followers</h1>
+  <!-- if user has no followers -->
+  <div ng-show="error === 'none'">
+    <p>Noone has saved your details yet.</p>
+  </div>
 
-  <!-- List all contacts -->
-  <a ng-repeat="follower in followers" href="#!/profile/{{follower.id}}" class="block">
-    <span>{{follower.firstname}} {{follower.lastname}}</span>
-    <span>{{follower.jobtitle}}</span>
-    <span>{{follower.sector}}</span>
-  </a>
+  <!-- internal error -->
+  <div ng-show="error === 'internal'">
+    <p>An unknown error occurred. Please try again later or contact 
+      <a href="mailto:info@pmcoding.co.uk">info@pmcoding.co.uk</a>.
+    </p>
+  </div>
+
+  <div ng-show="followers">
+    <!-- Search -->
+    <form>
+      <label for="search-contacts">Search contacts</label>
+      <input type="text" id="search-contacts">
+    </form>
+
+    <!-- List all contacts -->
+    <div>
+      <p>People, who saved your contact details:</p>
+      <div>
+        <a ng-repeat="follower in followers" href="#!/profile/{{follower.id}}" class="block">
+          <span>{{follower.firstname}} {{follower.lastname}}</span>
+          <span>{{follower.jobtitle}}</span>
+          <span>{{follower.sector}}</span>
+        </a>
+      </div>
+    </div>
+  </div>
 </div>
