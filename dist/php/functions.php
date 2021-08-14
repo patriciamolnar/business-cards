@@ -184,3 +184,18 @@ function get_contacts($column, $userid) {
   $row = $stmt->fetchAll(PDO::FETCH_ASSOC); 
   return $row;
 }
+
+function get_followers($userid) {
+  require 'includes/connect.inc.php';
+  $sql = 'SELECT users.firstname, users.lastname, users.id, details.jobtitle, details.sector
+          FROM users
+          LEFT JOIN details on details.uid = users.id
+          LEFT JOIN contacts on contacts.saved_by = users.id
+          WHERE contacts.saved_user = :userid; '; 
+  $stmt = $db->prepare($sql);
+  $stmt->execute(array(
+    ':userid' => $userid
+  ));
+  $row = $stmt->fetchAll(PDO::FETCH_ASSOC); 
+  return $row;
+}

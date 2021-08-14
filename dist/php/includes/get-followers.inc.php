@@ -5,7 +5,7 @@ if(isset($_GET['id'])) {
   $userid = trim($_GET['id']); 
   
   //get all contacts
-  $followers = get_contacts('saved_user', $userid); 
+  $followers = get_followers($userid); 
   if($followers) {
     echo json_encode(array(
       'success' => true, 
