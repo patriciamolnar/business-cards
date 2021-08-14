@@ -5,7 +5,7 @@ if(isset($_GET['id'])) {
   $userid = trim($_GET['id']); 
   
   //get all contacts
-  $contacts = get_contacts('saved_by', $userid); 
+  $contacts = get_contacts($userid); 
   if($contacts) {
     echo json_encode(array(
       'success' => true, 
