@@ -1,0 +1,14 @@
+<div>
+  <!-- Search Exisiting Contacts -->
+  <form>
+    <label for="search-contacts">Search contacts</label>
+    <input type="text" id="search-contacts">
+  </form>
+
+  <!-- List all contacts -->
+  <a ng-repeat="contact in contacts" href="#!/profile/{{contact.id}}" class="block">
+    <span>{{contact.firstname}} {{contact.lastname}}</span>
+    <span>{{contact.jobtitle}}</span>
+    <span>{{contact.sector}}</span>
+  </a>
+</div>

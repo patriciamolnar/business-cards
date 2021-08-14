@@ -168,3 +168,19 @@ function unsave_contact($saved_user, $saved_by) {
     ':saved_by' => $saved_by
   ));
 }
+
+//get contact details
+function get_contacts($column, $userid) {
+  require 'includes/connect.inc.php';
+  $sql = 'SELECT users.firstname, users.lastname, users.id, details.jobtitle, details.sector
+          FROM users
+          LEFT JOIN details on details.uid = users.id
+          LEFT JOIN contacts on contacts.saved_user = users.id
+          WHERE contacts.' . $column . ' = :userid; '; 
+  $stmt = $db->prepare($sql);
+  $stmt->execute(array(
+    ':userid' => $userid
+  ));
+  $row = $stmt->fetchAll(PDO::FETCH_ASSOC); 
+  return $row;
+}

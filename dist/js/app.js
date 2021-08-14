@@ -1,4 +1,4 @@
-const myApp = angular.module('myApp', ['ngRoute', 'ngStorage', 'HomeCtrl', 'LoginCtrl', 'SignupCtrl', 'AccountCtrl', 'SearchCtrl', 'ProfileCtrl']); 
+const myApp = angular.module('myApp', ['ngRoute', 'ngStorage', 'HomeCtrl', 'LoginCtrl', 'SignupCtrl', 'AccountCtrl', 'SearchCtrl', 'ProfileCtrl', 'ContactsCtrl']); 
 
 myApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
   // $locationProvider.html5Mode(true);
@@ -37,6 +37,10 @@ myApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $l
     .when('/profile/:id', {
       templateUrl: 'views/profile-id.html',
       controller: 'ProfileCtrl'
+    })
+    .when('/contacts', {
+      templateUrl: 'views/contacts.html',
+      controller: 'ContactsCtrl'
     })
     .otherwise({
       redirectTo: '/'
