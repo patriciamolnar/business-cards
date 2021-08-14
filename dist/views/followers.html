@@ -1,0 +1,16 @@
+<div>
+  <h2>Your followers</h2>
+  <p>People, who saved your contact details:</p>
+  <!-- Search -->
+  <form>
+    <label for="search-contacts">Search contacts</label>
+    <input type="text" id="search-contacts">
+  </form>
+
+  <!-- List all contacts -->
+  <a ng-repeat="follower in followers" href="#!/profile/{{follower.id}}" class="block">
+    <span>{{follower.firstname}} {{follower.lastname}}</span>
+    <span>{{follower.jobtitle}}</span>
+    <span>{{follower.sector}}</span>
+  </a>
+</div>
