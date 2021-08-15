@@ -1,6 +1,15 @@
 <div>
   <h1>Update Your Profile</h1>
+  <!-- PROFILE IMAGE -->
+  <h2>Upload a profile pictures</h2>
+  <form ng-submit="uploadImage()" novalidate>
+    <label for="profile-image">Select an image:</label>
+    <input type="file" name="profile-image" id="profile-image">
+    <button type="submit">Upload</button>
+  </form>
 
+  <!-- DETAILS -->
+  <h2>Edit your details</h2>
   <!-- errors -->
   <p ng-show="errors.includes('password')">
     Please provide your password to save your changes.

@@ -2,3 +2,4 @@ node_modules/
 connect.inc.php
 .htaccess
 znotes.txt
+uploads/

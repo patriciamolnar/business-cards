@@ -151,4 +151,24 @@ AccountCtrl.controller('AccountCtrl', function($scope, $rootScope, validationSer
       $scope.password = '';
     }
   }
+
+  //let user upload new profile image
+  $scope.uploadImage = function() {
+    let fd = new FormData();
+    const files = document.getElementById('profile-image').files[0];
+    fd.append('file', files);
+
+    $http({
+      url: 'php/includes/upload-image.inc.php',
+      method: 'post',
+      data: fd,
+      headers: {'Content-Type': undefined},
+    })
+    .then(function(response) { 
+      console.log(response.data); 
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
+  }
 }); 
