@@ -24,6 +24,12 @@ function check_string($input) {
   return preg_match($regex, $input);
 }
 
+function file_contains_php($file) {
+	$contents = file_get_contents($file);
+	$position = strpos($contents, '<?php');
+	return $position !== false;
+}
+
 //check if user detail taken
 function check_detail_taken($column, $value) {
   require 'includes/connect.inc.php'; 
@@ -209,5 +215,17 @@ function remove_follower($saved_user, $saved_by) {
   return $stmt->execute(array(
     ':saved_user' => $saved_user,
     ':saved_by' => $saved_by
+  ));
+}
+
+// PROFILE IMAGE
+function add_image($userid, $image) {
+  require 'includes/connect.inc.php';
+  $sql = 'INSERT INTO image (uid, image)
+          VALUES (:uid, :image)'; 
+  $stmt = $db->prepare($sql);
+  return $stmt->execute(array(
+    ':uid' => $userid,
+    ':image' => $image
   ));
 }

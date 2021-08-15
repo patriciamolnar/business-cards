@@ -157,11 +157,12 @@ AccountCtrl.controller('AccountCtrl', function($scope, $rootScope, validationSer
     let fd = new FormData();
     const files = document.getElementById('profile-image').files[0];
     fd.append('file', files);
+    fd.append('id', $localStorage.user.id);
 
     $http({
       url: 'php/includes/upload-image.inc.php',
       method: 'post',
-      data: fd,
+      data: fd, 
       headers: {'Content-Type': undefined},
     })
     .then(function(response) { 
