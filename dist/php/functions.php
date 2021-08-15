@@ -187,7 +187,7 @@ function get_contacts($userid) {
 
 function get_followers($userid) {
   require 'includes/connect.inc.php';
-  $sql = 'SELECT users.firstname, users.lastname, users.id, details.jobtitle, details.sector
+  $sql = 'SELECT users.id, users.firstname, users.lastname, users.id, details.jobtitle, details.sector 
           FROM users
           LEFT JOIN details on details.uid = users.id
           LEFT JOIN contacts on contacts.saved_by = users.id
@@ -198,4 +198,16 @@ function get_followers($userid) {
   ));
   $row = $stmt->fetchAll(PDO::FETCH_ASSOC); 
   return $row;
+}
+
+function remove_follower($saved_user, $saved_by) {
+  require 'includes/connect.inc.php';
+  $sql = 'DELETE FROM contacts
+          WHERE saved_user = :saved_user AND saved_by = :saved_by
+          LIMIT 1;'; 
+  $stmt = $db->prepare($sql);
+  return $stmt->execute(array(
+    ':saved_user' => $saved_user,
+    ':saved_by' => $saved_by
+  ));
 }

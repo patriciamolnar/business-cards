@@ -22,12 +22,13 @@
     <!-- List all contacts -->
     <div>
       <p>People, who saved your contact details:</p>
-      <div>
-        <a ng-repeat="follower in followers | filter: searchTerm" href="#!/profile/{{follower.id}}" class="block">
+      <div ng-repeat="follower in followers | filter: searchTerm">
+        <a href="#!/profile/{{follower.id}}" class="block">
           <span>{{follower.firstname}} {{follower.lastname}}</span>
           <span>{{follower.jobtitle}}</span>
           <span>{{follower.sector}}</span>
         </a>
+        <button ng-click="removeFromFollowers(follower.id)">&times;</button>
       </div>
     </div>
   </div>
