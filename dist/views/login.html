@@ -1,5 +1,5 @@
 <div>
-  <h1>Login</h1>
+  <h1 class="font-semibold text-purple-600 text-xl mt-4 mb-2">Login</h1>
 
   <p ng-show="result.errors === 'blank'">
     Please fill in all fields.
@@ -15,10 +15,13 @@
       <label for="login-email">Email:</label>
       <input 
         type="email" name="email" id="login-email" autocomplete="email"
+        placeholder="Type your email..."
+        class="mb-2"
         ng-model="loginCredentials.email"
         ng-required="true">
       <!-- error: email missing -->
-      <p ng-show="myLogin.email.$invalid && myLogin.email.$touched">
+      <p ng-show="myLogin.email.$invalid && myLogin.email.$touched"
+        class="error">
         Please fill in your account email.
       </p>
 
@@ -26,15 +29,18 @@
       <label for="login-password">Password:</label>
       <input 
         type="password" name="password" id="login-password" autocomplete="current-password"
+        placeholder="Type your password..."
+        class="mb-2"
         ng-model="loginCredentials.password"
         ng-required="true">
 
       <!-- error: password missing -->
-      <p ng-show="myLogin.password.$invalid && myLogin.password.$touched">
+      <p ng-show="myLogin.password.$invalid && myLogin.password.$touched" class="error">
         Please provide your password.
       </p>
-
-      <button type="submit">Login</button>
     </fieldset> 
+    <div class="text-right mt-4">
+      <button type="submit">Login</button>
+    </div>
   </form>
 </div>
