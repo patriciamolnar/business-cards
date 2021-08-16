@@ -18,7 +18,13 @@
 
     <div ng-show="user">
       <p>Your result for {{ searchTerm }}:</p>
-      <a href="#!/profile/{{user.id}}">{{user.firstname}} {{user.lastname}}</a>
+      <div>
+        <img ng-show="user.image"
+          src="uploads/{{user.image}}" 
+          alt="Image of {{user.firstname}} {{user.lastname}}"
+          class="w-16">
+        <a href="#!/profile/{{user.id}}">{{user.firstname}} {{user.lastname}}</a>
+      </div>
     </div>
 
     <div ng-if="error === 'nouser'">
