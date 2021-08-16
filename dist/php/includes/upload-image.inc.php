@@ -48,26 +48,47 @@ if(!request_is_post()) {
       'error' => 'size'
     ));
     exit();
-  }
+  }  
 
   //upload image and add to DB
   $userid = $_POST['id'];
   $uniquename = round(microtime(true)) . '-' . $filename;
 
   if(move_uploaded_file($_FILES['file']['tmp_name'], $location.$uniquename)) {
-    $save_success = add_image($userid, $uniquename); 
+    //check if user already has a row in image table
+    $has_image = has_image($userid); 
+    if($has_image) {
+      $update_success = update_image($userid, $uniquename); 
+      if($update_success) {
+        //delete prev image 
+        unlink('C:\wamp64\www\BZcards\dist\uploads/' . $has_image['image']);
+        echo json_encode(array(
+          'success' => true, 
+          'url' => $uniquename
+        ));
+      } else { //couldn't save img name in DB
+        echo json_encode(array(
+          'success' => false, 
+          'url' => 'generic'
+        ));
+      }
 
-    if($save_success) {
-      echo json_encode(array(
-        'success' => true, 
-        'url' => $uniquename
-      ));
-    } else { //couldn't save img name in DB
-      echo json_encode(array(
-        'success' => false, 
-        'url' => 'generic'
-      ));
+    } else {
+      $save_success = add_image($userid, $uniquename); 
+
+      if($save_success) {
+        echo json_encode(array(
+          'success' => true, 
+          'url' => $uniquename
+        ));
+      } else { //couldn't save img name in DB
+        echo json_encode(array(
+          'success' => false, 
+          'url' => 'generic'
+        ));
+      }
     }
+    
   } else { //couldn't upload image to server
     echo json_encode(array(
       'success' => false, 

@@ -224,10 +224,34 @@ function remove_follower($saved_user, $saved_by) {
 }
 
 // PROFILE IMAGE
+function has_image($userid) {
+  require 'includes/connect.inc.php';
+  $sql = 'SELECT * FROM image
+          WHERE uid = :uid;'; 
+  $stmt = $db->prepare($sql);
+  $stmt->execute(array(
+    ':uid' => $userid
+  ));
+  $row = $stmt->fetch(PDO::FETCH_ASSOC); 
+  return $row;
+}
+
 function add_image($userid, $image) {
   require 'includes/connect.inc.php';
   $sql = 'INSERT INTO image (uid, image)
-          VALUES (:uid, :image)'; 
+          VALUES (:uid, :image);'; 
+  $stmt = $db->prepare($sql);
+  return $stmt->execute(array(
+    ':uid' => $userid,
+    ':image' => $image
+  ));
+}
+
+function update_image($userid, $image) {
+  require 'includes/connect.inc.php';
+  $sql = 'UPDATE image
+          SET image = :image
+          WHERE uid = :uid;'; 
   $stmt = $db->prepare($sql);
   return $stmt->execute(array(
     ':uid' => $userid,
