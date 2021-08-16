@@ -31,19 +31,24 @@
   <title>BZ Cards</title>
 </head>
 <body class="font-quicksand bg-gray-50 p-2">
-  <header>
-    <a href="#!/">BZ</a>
-    <nav>
-      <a href="#!/login" ng-hide="$storage.loggedIn">Login</a>
-      <a href="#!/signup" ng-hide="$storage.loggedIn">Sign Up</a>
-      <a href="#!/dashboard" ng-show="$storage.loggedIn">Dashboard</a>
-      <a href="#!/account">Account</a>
-      <a href="#!/profile/{{$storage.user.id}}">Profile</a>
-      <button ng-click="logoutUser()" ng-show="$storage.loggedIn">logout</button>
+  <header class="flex justify-between items-center">
+    <a href="#!/"
+    class="font-serif text-xl border-none font-medium ">
+      BZCards
+    </a>
 
-     Status: {{ $storage.loggedIn }} | ID: {{ $storage.user.id }}
+    <nav ng-hide="$storage.loggedIn">
+      <a href="#!/login" ng-hide="$storage.loggedIn" class="mr-1">Login</a>
+      <a href="#!/signup" ng-hide="$storage.loggedIn">Sign Up</a>
+    </nav>
+
+    <nav ng-show="$storage.loggedIn">
+      <a href="#!/dashboard" ng-show="$storage.loggedIn">Dashboard</a>
+      <button ng-click="logoutUser()" ng-show="$storage.loggedIn">logout</button>
     </nav>
   </header>
+
+  <span class="text-xs">Status: {{ $storage.loggedIn }} | ID: {{ $storage.user.id }}</span>
 
   <main ng-view></main>
 </body>
