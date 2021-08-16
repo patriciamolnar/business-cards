@@ -41,6 +41,10 @@
 
     <!-- List all contacts -->
     <a ng-repeat="contact in contacts | filter:searchTerm" href="#!/profile/{{contact.id}}" class="block">
+      <img ng-show="contact.image"
+        ng-src="uploads/{{contact.image}}" 
+        alt="Image of {{contact.firstname}} {{contact.lastname}}"
+        class="w-16">
       <span>{{contact.firstname}} {{contact.lastname}}</span>
       <span>{{contact.jobtitle}}</span>
       <span>{{contact.sector}}</span>

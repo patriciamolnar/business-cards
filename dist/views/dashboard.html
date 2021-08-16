@@ -1,7 +1,7 @@
 <div>
   <div>
     <img ng-show="$storage.user.image"
-      src="./uploads/{{$storage.user.image}}" 
+      ng-src="./uploads/{{$storage.user.image}}" 
       alt="Profile Image of {{$storage.user.firstname}} {{$storage.user.lastname}}"
       class="w-16 h-16">
     <h1>Welcome {{$storage.user.firstname}} {{$storage.user.lastname}}!</h1>
@@ -20,7 +20,7 @@
       <p>Your result for {{ searchTerm }}:</p>
       <div>
         <img ng-show="user.image"
-          src="uploads/{{user.image}}" 
+          ng-src="uploads/{{user.image}}" 
           alt="Image of {{user.firstname}} {{user.lastname}}"
           class="w-16">
         <a href="#!/profile/{{user.id}}">{{user.firstname}} {{user.lastname}}</a>
