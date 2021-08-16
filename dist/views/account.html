@@ -5,7 +5,7 @@
   <img ng-show="$storage.user.image"
       ng-src="./uploads/{{$storage.user.image}}" 
       alt="Profile Image of {{$storage.user.firstname}} {{$storage.user.lastname}}"
-      class="w-16">
+      class="avatar">
       
   <form ng-submit="uploadImage()" novalidate>
     <label for="profile-image">Select an image:</label>
@@ -30,6 +30,26 @@
 
   <p ng-show="result.errors.includes('nochange')">
     No information was changed. 
+  </p>
+
+  <p ng-show="result.errors.includes('size')">
+    The image you uploaded is too big. The limit is 2MB.
+  </p>
+
+  <p ng-show="result.errors.includes('size')">
+    The image you uploaded is too big. The limit is 2MB.
+  </p>
+
+  <p ng-show="result.errors.includes('type')">
+    Incorrect file format uploaded. Only JPGs and PNGs allowed.  
+  </p>
+
+  <p ng-show="result.errors.includes('noimage')">
+    Please select an image to upload to proceed.  
+  </p>
+
+  <p ng-show="result.errors.includes('generic')">
+    There was an error uploading your profile image. Please try again later or contact info@pmcoding.co.uk. 
   </p>
 
   <p class="success-message" ng-show="result.success">

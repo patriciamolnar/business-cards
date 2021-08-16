@@ -166,10 +166,10 @@ AccountCtrl.controller('AccountCtrl', function($scope, $rootScope, validationSer
       headers: {'Content-Type': undefined},
     })
     .then(function(response) { 
-      console.log(response.data); 
+      $localStorage.user.image = response.data.url;  
     })
     .catch(function(error) {
-      console.log(error);
+      $scope.errors.push(error); 
     });
   }
 }); 

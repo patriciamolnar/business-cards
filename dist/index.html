@@ -32,7 +32,7 @@
 <body class="font-quicksand bg-gray-50 p-2 mx-2">
   <header class="flex justify-between items-center">
     <a href="#!/"
-    class="font-serif text-4xl border-none font-styleScript font-medium ">
+    class="text-4xl border-none font-styleScript font-medium ">
       BZCards
     </a>
 
@@ -46,8 +46,16 @@
       <button ng-click="logoutUser()" ng-show="$storage.loggedIn">logout</button>
     </nav>
   </header>
-
-  <span class="text-xs">Status: {{ $storage.loggedIn }} | ID: {{ $storage.user.id }}</span>
+  
+  <div class="my-4" ng-show="$storage.loggedIn">
+    <h2 class="font-semibold">Quick Links:</h2>
+    <nav>
+      <a href="#!/account">Account</a>
+      <a href="#!/profile/{{$storage.user.id}}">Profile</a>
+      <a href="#!/profile/contacts">Contacts</a>
+      <a href="#!/profile/followers">Followers</a>
+    </nav>
+  </div>
 
   <main ng-view></main>
 </body>

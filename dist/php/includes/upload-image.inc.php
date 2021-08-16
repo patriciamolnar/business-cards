@@ -65,18 +65,18 @@ if(!request_is_post()) {
     } else { //couldn't save img name in DB
       echo json_encode(array(
         'success' => false, 
-        'url' => 'internal'
+        'url' => 'generic'
       ));
     }
   } else { //couldn't upload image to server
     echo json_encode(array(
       'success' => false, 
-      'error' => 'image'
+      'error' => 'generic'
     ));
   }
 } else { //no image uploaded 
   echo json_encode(array(
     'success' => false, 
-    'error' => 'noimage'
+    'error' => 'generic'
   ));
 }
