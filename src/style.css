@@ -9,11 +9,11 @@
 
   input,
   textarea {
-    @apply block w-full border border-gray-300; 
+    @apply block w-full border border-gray-300 p-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent; 
   }
 
   button { 
-    @apply bg-purple-600 hover:bg-purple-800 text-white font-semibold py-2 px-4 rounded; 
+    @apply bg-purple-600 hover:bg-purple-800 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2; 
   }
 
   a {
@@ -31,6 +31,14 @@
   }
 
   .button {
-    @apply bg-purple-600 hover:bg-purple-800 text-white font-semibold py-2 px-4 rounded; 
+    @apply bg-purple-600 hover:bg-purple-800 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-600; 
+  }
+
+  .error {
+    @apply text-red-500 font-semibold; 
+  }
+
+  .ng-invalid.ng-touched {
+    @apply border-solid border-2 border-red-500; 
   }
 }

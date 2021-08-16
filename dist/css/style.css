@@ -603,6 +603,24 @@ input, textarea {
   border-color: rgba(209, 213, 219, var(--tw-border-opacity));
 }
 
+input:focus, textarea:focus {
+  border-color: transparent;
+}
+
+input, textarea {
+  padding: 0.25rem;
+}
+
+input:focus, textarea:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgba(124, 58, 237, var(--tw-ring-opacity));
+}
+
 button {
   border-radius: 0.25rem;
   --tw-bg-opacity: 1;
@@ -622,6 +640,17 @@ button {
   font-weight: 600;
   --tw-text-opacity: 1;
   color: rgba(255, 255, 255, var(--tw-text-opacity));
+}
+
+button:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgba(124, 58, 237, var(--tw-ring-opacity));
+  --tw-ring-offset-width: 2px;
 }
 
 a {
@@ -22429,6 +22458,10 @@ p {
   font-family: "Quicksand", sans-serif;
 }
 
+.font-styleScript {
+  font-family: "Style Script", sans-serif;
+}
+
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
@@ -32317,6 +32350,30 @@ p {
   font-weight: 600;
   --tw-text-opacity: 1;
   color: rgba(255, 255, 255, var(--tw-text-opacity));
+}
+
+.button:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgba(124, 58, 237, var(--tw-ring-opacity));
+  --tw-ring-offset-width: 2px;
+}
+
+.error {
+  font-weight: 600;
+  --tw-text-opacity: 1;
+  color: rgba(239, 68, 68, var(--tw-text-opacity));
+}
+
+.ng-invalid.ng-touched {
+  border-width: 2px;
+  border-style: solid;
+  --tw-border-opacity: 1;
+  border-color: rgba(239, 68, 68, var(--tw-border-opacity));
 }
 
 @media (min-width: 640px) {
@@ -54036,6 +54093,10 @@ p {
 
   .sm\:font-quicksand {
     font-family: "Quicksand", sans-serif;
+  }
+
+  .sm\:font-styleScript {
+    font-family: "Style Script", sans-serif;
   }
 
   .sm\:text-xs {
@@ -85269,6 +85330,10 @@ p {
     font-family: "Quicksand", sans-serif;
   }
 
+  .md\:font-styleScript {
+    font-family: "Style Script", sans-serif;
+  }
+
   .md\:text-xs {
     font-size: 0.75rem;
     line-height: 1rem;
@@ -116498,6 +116563,10 @@ p {
 
   .lg\:font-quicksand {
     font-family: "Quicksand", sans-serif;
+  }
+
+  .lg\:font-styleScript {
+    font-family: "Style Script", sans-serif;
   }
 
   .lg\:text-xs {
@@ -147731,6 +147800,10 @@ p {
     font-family: "Quicksand", sans-serif;
   }
 
+  .xl\:font-styleScript {
+    font-family: "Style Script", sans-serif;
+  }
+
   .xl\:text-xs {
     font-size: 0.75rem;
     line-height: 1rem;
@@ -178960,6 +179033,10 @@ p {
 
   .\32xl\:font-quicksand {
     font-family: "Quicksand", sans-serif;
+  }
+
+  .\32xl\:font-styleScript {
+    font-family: "Style Script", sans-serif;
   }
 
   .\32xl\:text-xs {
