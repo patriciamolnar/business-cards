@@ -6,12 +6,12 @@
 
     <button 
       ng-click="saveContact(user.id)"
-      ng-show="btnMessage && $storage.loggedIn">
+      ng-show="btnMessage && $storage.loggedIn && ($storage.user.id !== user.id)">
       {{ btnMessage }}
     </button>
     <img ng-show="user.image"
       ng-src="uploads/{{user.image}}" alt="Image of {{ user.firstname }} {{ user.lastname }}"
-      class="w-16"
+      class="avatar"
     >
     <h1>{{ user.firstname }} {{ user.lastname }}</h1>
     <h2>{{ user.jobtitle }}</h2>
