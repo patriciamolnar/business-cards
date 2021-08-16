@@ -23,6 +23,10 @@
     <div>
       <p>People, who saved your contact details:</p>
       <div ng-repeat="follower in followers | filter: searchTerm">
+        <img ng-show="follower.image"
+          src="uploads/{{follower.image}}" alt="Image of {{follower.firstname}} {{follower.lastname}}"
+          class="w-16"
+        >
         <a href="#!/profile/{{follower.id}}" class="block">
           <span>{{follower.firstname}} {{follower.lastname}}</span>
           <span>{{follower.jobtitle}}</span>

@@ -197,11 +197,12 @@ function get_contacts($userid) {
 
 function get_followers($userid) {
   require 'includes/connect.inc.php';
-  $sql = 'SELECT users.id, users.firstname, users.lastname, users.id, details.jobtitle, details.sector 
+  $sql = 'SELECT users.id, users.firstname, users.lastname, users.id, details.jobtitle, details.sector, image.image 
           FROM users
-          LEFT JOIN details on details.uid = users.id
-          LEFT JOIN contacts on contacts.saved_by = users.id
-          WHERE contacts.saved_user = :userid; '; 
+          LEFT JOIN details ON details.uid = users.id
+          LEFT JOIN contacts ON contacts.saved_by = users.id
+          LEFT JOIN image ON contacts.saved_by = image.uid
+          WHERE contacts.saved_user = :userid;'; 
   $stmt = $db->prepare($sql);
   $stmt->execute(array(
     ':userid' => $userid
