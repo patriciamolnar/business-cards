@@ -2,6 +2,11 @@
   <h1>Update Your Profile</h1>
   <!-- PROFILE IMAGE -->
   <h2>Upload a profile pictures</h2>
+  <img ng-show="$storage.user.image"
+      ng-src="./uploads/{{$storage.user.image}}" 
+      alt="Profile Image of {{$storage.user.firstname}} {{$storage.user.lastname}}"
+      class="w-16">
+      
   <form ng-submit="uploadImage()" novalidate>
     <label for="profile-image">Select an image:</label>
     <input type="file" name="profile-image" id="profile-image">
