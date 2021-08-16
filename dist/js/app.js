@@ -1,4 +1,4 @@
-const myApp = angular.module('myApp', ['ngRoute', 'ngStorage', 'HomeCtrl', 'LoginCtrl', 'SignupCtrl', 'AccountCtrl', 'SearchCtrl', 'ProfileCtrl', 'ContactsCtrl', 'FollowersCtrl']); 
+const myApp = angular.module('myApp', ['ngRoute', 'ngStorage', 'LoginCtrl', 'SignupCtrl', 'AccountCtrl', 'SearchCtrl', 'ProfileCtrl', 'ContactsCtrl', 'FollowersCtrl']); 
 
 myApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
   // $locationProvider.html5Mode(true);
@@ -6,8 +6,7 @@ myApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $l
 
   $routeProvider
     .when('/', {
-      templateUrl: 'views/home.html', 
-      controller: 'HomeCtrl'
+      templateUrl: 'views/home.html'
     })
     .when('/login', {
       templateUrl: 'views/login.html',  
