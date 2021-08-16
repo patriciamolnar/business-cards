@@ -75,9 +75,10 @@ function register_user($firstname, $lastname, $email, $password) {
 //get details from tables: users and details
 function get_details($key, $value) {
   require 'includes/connect.inc.php'; 
-  $sql = 'SELECT users.*, details.jobtitle,  details.description, details.sector, details.office, details.mobile, details.website, details.twitter, details.instagram, details.facebook 
+  $sql = 'SELECT users.*, details.jobtitle,  details.description, details.sector, details.office, details.mobile, details.website, details.twitter, details.instagram, details.facebook, image.image 
           FROM users
           LEFT JOIN details ON users.id = details.uid
+          LEFT JOIN image ON users.id = image.uid
           WHERE users.' . $key . ' = :value;';
   $stmt = $db->prepare($sql);
   $stmt->bindParam(':value', $value);
@@ -126,8 +127,10 @@ function update_details($id, $jobtitle, $description, $sector, $office, $mobile,
 //search user from table: details 
 function search_user($key, $value) {
   require 'includes/connect.inc.php';
-  $sql = 'SELECT * FROM users
-          WHERE ' . $key . ' = :value;'; 
+  $sql = 'SELECT users.id, users.email, users.firstname, users.lastname, image.image 
+          FROM users
+          LEFT JOIN image ON users.id = image.uid
+          WHERE users.' . $key . ' = :value;'; 
   $stmt = $db->prepare($sql);
   $stmt->execute(array(':value' => $value));
   $row = $stmt->fetch(PDO::FETCH_ASSOC); 
@@ -178,10 +181,11 @@ function unsave_contact($saved_user, $saved_by) {
 //get contact details
 function get_contacts($userid) {
   require 'includes/connect.inc.php';
-  $sql = 'SELECT users.firstname, users.lastname, users.id, details.jobtitle, details.sector
+  $sql = 'SELECT users.firstname, users.lastname, users.id, details.jobtitle, details.sector, image.image
           FROM users
           LEFT JOIN details on details.uid = users.id
           LEFT JOIN contacts on contacts.saved_user = users.id
+          LEFT JOIN image on users.id = image.uid
           WHERE contacts.saved_by = :userid; '; 
   $stmt = $db->prepare($sql);
   $stmt->execute(array(

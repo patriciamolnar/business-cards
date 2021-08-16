@@ -60,7 +60,8 @@ if(!request_is_post()) {
         'website' => $user['website'],
         'twitter' => $user['twitter'],
         'instagram' => $user['instagram'],
-        'facebook' => $user['facebook']
+        'facebook' => $user['facebook'], 
+        'image' => $user['image']
       )
     ]);
   }

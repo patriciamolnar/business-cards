@@ -22,7 +22,8 @@ if(isset($_GET['id'])) {
         'website' => $user['website'], 
         'twitter' => $user['twitter'], 
         'instagram' => $user['instagram'], 
-        'facebook' => $user['facebook']
+        'facebook' => $user['facebook'], 
+        'image' => $user['image']
       )
     ));
   } else { //no user found

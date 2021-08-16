@@ -8,12 +8,7 @@ if(isset($_GET['search'])) {
     echo json_encode(array(
       'success' => true, 
       'error' => '',
-      'user' => array(
-        'firstname' => $user['firstname'],
-        'lastname' => $user['lastname'],
-        'email' => $user['email'],
-        'id' => $user['id']
-      )
+      'user' => $user
     ));
   } else { //no user found
     echo json_encode(array(
