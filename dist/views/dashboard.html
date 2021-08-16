@@ -1,5 +1,11 @@
 <div>
-  <h1>Welcome {{$storage.user.firstname}} {{$storage.user.lastname}}!</h1>
+  <div>
+    <img ng-show="$storage.user.image"
+      src="./uploads/{{$storage.user.image}}" 
+      alt="Profile Image of {{$storage.user.firstname}} {{$storage.user.lastname}}"
+      class="w-16 h-16">
+    <h1>Welcome {{$storage.user.firstname}} {{$storage.user.lastname}}!</h1>
+  </div>
   <div ng-controller="SearchCtrl">
     <h2>Search</h2>
     <form name="mySearch" ng-submit="searchUser()">
