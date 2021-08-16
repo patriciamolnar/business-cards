@@ -38,7 +38,7 @@
       <a href="#!/signup" ng-hide="$storage.loggedIn">Sign Up</a>
       <a href="#!/dashboard" ng-show="$storage.loggedIn">Dashboard</a>
       <a href="#!/account">Account</a>
-      <a href="#!/profile">Profile</a>
+      <a href="#!/profile/{{$storage.user.id}}">Profile</a>
       <button ng-click="logoutUser()" ng-show="$storage.loggedIn">logout</button>
 
      Status: {{ $storage.loggedIn }} | ID: {{ $storage.user.id }}
