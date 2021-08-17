@@ -18,13 +18,13 @@ myApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $l
     })
     .when('/dashboard', {
       templateUrl: 'views/dashboard.html',
-      resolve: {
-        'checkLoggedIn': function($location, $rootScope) {
-          if(!$rootScope.$storage.loggedIn) {
-            $location.path('/login'); 
-          }
-        }
-      }
+      // resolve: {
+      //   'checkLoggedIn': function($location, $rootScope) {
+      //     if(!$rootScope.$storage.loggedIn) {
+      //       $location.path('/login'); 
+      //     }
+      //   }
+      // }
     })
     .when('/account', {
       templateUrl: 'views/account.html',
@@ -61,6 +61,28 @@ myApp.controller('AppCtrl', function($scope, $rootScope, $location, $localStorag
     $location.path('/'); 
   }
 }); 
+
+myApp.run(['$rootScope', '$location', function($rootScope, $location) {
+  $rootScope.$on('$routeChangeStart', function (event) {
+    //protect paths based on whether user is logged in/out
+    const protectedPaths = ['/account', '/dashboard', '/contacts', '/followers']; 
+    const publicPaths = ['/login', '/signup'];
+
+    const path = $location.path(); //get current path.
+
+    //if user is not logged in - redirect to login
+    if (!$rootScope.$storage.loggedIn && protectedPaths.includes(path)) {
+      event.preventDefault();
+      $location.path('/login'); 
+    }
+
+    //if user is logged in - redirect to dashboard
+    if ($rootScope.$storage.loggedIn && publicPaths.includes(path)) {
+      event.preventDefault();
+      $location.path('/dashboard'); 
+    }
+  });
+}]); 
 
 //Service containing all the regexes for form data validation
 myApp.service('validationService', function() {
