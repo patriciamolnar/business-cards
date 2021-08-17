@@ -24,7 +24,7 @@
 
     <div ng-show="user">
       <p class="font-semibold">
-        Your result for <span class="font-medium">{{ searchTerm }}</span>:
+        Search result:
       </p>
       <a href="#!/profile/{{user.id}}" class="flex gap-2 items-end bg-white border-none shadow-md p-1">
         <img ng-show="user.image"
@@ -36,7 +36,7 @@
     </div>
 
     <div ng-if="error === 'nouser'">
-      <p class="font-medium">There is no account with {{ searchTerm }}.</p>
+      <p class="font-semibold">No account found.</p>
     </div>
   </div>
 

@@ -9,10 +9,14 @@ SearchCtrl.controller('SearchCtrl', function($scope, $http) {
       method: 'GET', 
     })
     .then(function(response) {
-      $scope.user = response.data.user;
-      if(response.data.success === false) {
-        $scope.error = response.data.error; 
+      if(response.data.success === true) {
+        $scope.user = response.data.user;
+        $scope.error = '';
+      } else {
+        $scope.error = response.data.error;
       }
+      
+      $scope.searchTerm = ''; 
     })
     .catch(function(error) {
       console.log(error);  
