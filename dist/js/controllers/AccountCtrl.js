@@ -140,6 +140,7 @@ AccountCtrl.controller('AccountCtrl', function($scope, $rootScope, validationSer
         } 
 
         $scope.password = ''; //update done, reset password
+        $scope.myAccount.$setUntouched(); //set form to untouched state so no error msgs are showing
         return response.data;
       })
       .catch(function(error) {
