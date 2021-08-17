@@ -219,35 +219,35 @@
     <!-- SOCIAL -->
     <label for="twitter">Twitter</label>
     <input type="text" name="twitter" id="twitter" 
-      placeholder="Type in your twitter..."
+      placeholder="www.twitter.com/your-username"
       class="mb-2"
       ng-model="user.add.twitter"
       ng-pattern="regex.url" />
     
     <p class="error" ng-show="myAccount.twitter.$invalid && myAccount.twitter.$touched">
-      The URL provided to your Twitter account is invalid.
+      The URL provided to your Twitter account is invalid. Ensure the URL starts with 'www' or 'https'.
     </p>
 
     <label for="instagram">Instagram</label>
     <input type="text" name="instagram" id="instagram" 
-      placeholder="Type in your Instagram..."
+      placeholder="www.instagram.com/your-username"
       class="mb-2"
       ng-model="user.add.instagram"
       ng-pattern="regex.url" />
     
     <p class="error" ng-show="myAccount.instagram.$invalid && myAccount.instagram.$touched">
-      The URL provided to your Instagram account is invalid.
+      The URL provided to your Instagram account is invalid. Ensure the URL starts with 'www' or 'https'.
     </p>
 
     <label for="facebook">Facebook</label>
     <input type="text" name="password" id="facebook" 
-      placeholder="Type in your Facebook..."
+      placeholder="www.facebook.com/your-username"
       class="mb-2"
       ng-model="user.add.facebook"
       ng-pattern="regex.url" />
     
     <p class="error" ng-show="myAccount.instagram.$invalid && myAccount.instagram.$touched">
-      The URL provided to your Facebook account is invalid.
+      The URL provided to your Facebook account is invalid. Ensure the URL starts with 'www' or 'https'.
     </p>
 
     <!-- PASSWORD -->

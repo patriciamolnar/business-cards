@@ -37,7 +37,7 @@
       <svg class="inline-block w-6 h-6 fill-current text-purple-600">
         <use href="#website"></use>
       </svg>
-      <span>{{ user.website }}</span>
+      <span ng-bind-html="user.website | linky: '_blank':{rel: 'nofollow'}">{{ user.website }}</span>
     </p>
 
     <p ng-show="user.office">
@@ -58,21 +58,21 @@
       <svg class="inline-block w-6 h-6 fill-current text-purple-600">
         <use href="#facebook"></use>
       </svg>
-      <span>{{ user.facebook }}</span>
+      <span ng-bind-html="user.facebook | linky: '_blank': {rel: 'nofollow'}"></span>
     </p>
 
     <p ng-show="user.twitter">
       <svg class="inline-block w-6 h-6 fill-current text-purple-600">
         <use href="#twitter"></use>
       </svg>
-      <span>{{ user.twitter }}</span>
+      <span ng-bind-html="user.twitter | linky: '_blank': {rel: 'nofollow'}"></span>
     </p>
 
     <p ng-show="user.instagram">
       <svg class="inline-block w-6 h-6 fill-current text-purple-600">
         <use href="#instagram"></use>
       </svg>
-      <span>{{ user.instagram }}</span>
+      <span ng-bind-html="user.instagram | linky: '_blank': {rel: 'nofollow'}"></span>
     </p>
   </div>
 
