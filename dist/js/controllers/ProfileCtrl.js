@@ -19,22 +19,23 @@ ProfileCtrl.controller('ProfileCtrl', function($scope, $http, $routeParams, $loc
     $scope.error = error; 
     throw error; 
   });
-
-  //check if user is already saved contact. 
-  $http({
-    url: 'php/includes/is-contact.inc.php?saved_user=' + $routeParams.id + '&saved_by=' + $localStorage.user.id,
-    method: 'GET'
-  })
-  .then(function(response) {
-    if(response.data.saved === true) {
-      $scope.btnMessage = 'Unsave Contact';
-    } else {
-      $scope.btnMessage = 'Save Contact';
-    }
-  })
-  .catch(function(error) {
-    console.log(error); 
-  }); 
+ 
+  if($localStorage.loggedIn === true) {
+    $http({
+      url: 'php/includes/is-contact.inc.php?saved_user=' + $routeParams.id + '&saved_by=' + $localStorage.user.id,
+      method: 'GET'
+    })
+    .then(function(response) {
+      if(response.data.saved === true) {
+        $scope.btnMessage = 'Unsave Contact';
+      } else {
+        $scope.btnMessage = 'Save Contact';
+      }
+    })
+    .catch(function(error) {
+      console.log(error); 
+    });
+  }
 
   $scope.saveContact = function(id) {
     $http({
