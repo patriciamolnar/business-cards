@@ -1,11 +1,11 @@
 const SignupCtrl = angular.module('SignupCtrl', []); 
 
-SignupCtrl.controller('SignupCtrl', function($scope, $http) {
+SignupCtrl.controller('SignupCtrl', function($scope, $http, validationService) {
 
   //regexes
-  $scope.emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i; 
-  $scope.stringRegex = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/; 
-  $scope.passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*\.])(?=.{8,})/;
+  $scope.emailRegex = validationService.getEmailRegex(); 
+  $scope.stringRegex = validationService.getStringRegex(); 
+  $scope.passwordRegex = validationService.getPasswordRegex();
 
   //data for signup
   $scope.user = {
