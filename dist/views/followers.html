@@ -1,12 +1,12 @@
 <div>
-  <h1>Your followers</h1>
+  <h1 class="font-semibold text-xl mt-4 mb-2">Your followers</h1>
   <!-- if user has no followers -->
   <div ng-show="error === 'none'">
-    <p>Noone has saved your details yet.</p>
+    <p class="font-medium">Noone has saved your details yet.</p>
   </div>
 
   <!-- internal error -->
-  <div ng-show="error === 'internal'">
+  <div class="error" ng-show="error === 'internal'">
     <p>An unknown error occurred. Please try again later or contact 
       <a href="mailto:info@pmcoding.co.uk">info@pmcoding.co.uk</a>.
     </p>
@@ -15,24 +15,32 @@
   <div ng-show="followers">
     <!-- Search -->
     <form>
-      <label for="search-contacts">Search contacts</label>
+      <label for="search-contacts">Search your followers</label>
       <input type="text" id="search-contacts" ng-model="searchTerm">
     </form>
 
     <!-- List all contacts -->
     <div>
-      <p>People, who saved your contact details:</p>
-      <div ng-repeat="follower in followers | filter: searchTerm">
-        <img ng-show="follower.image"
-          ng-src="uploads/{{follower.image}}" alt="Image of {{follower.firstname}} {{follower.lastname}}"
-          class="w-16"
-        >
-        <a href="#!/profile/{{follower.id}}" class="block">
-          <span>{{follower.firstname}} {{follower.lastname}}</span>
-          <span>{{follower.jobtitle}}</span>
-          <span>{{follower.sector}}</span>
+      <p class="font-semibold">People, who saved your details:</p>
+      <div ng-repeat="follower in followers | filter: searchTerm" class="relative my-4">
+        <a href="#!/profile/{{follower.id}}" 
+        class="block bg-white flex gap-2 border-none p-1 shadow-md">
+          <img ng-show="follower.image"
+            ng-src="uploads/{{follower.image}}" alt="Image of {{follower.firstname}} {{follower.lastname}}"
+            class="avatar"
+          >
+          <div class="pr-0.75">
+            <span class="font-semibold">
+              {{follower.firstname}} {{follower.lastname}}
+            </span> <br />
+            <span class="font-medium text-sm">{{follower.jobtitle}}</span> <br />
+            <span class="text-xs">{{follower.sector}}</span>
+          </div>
         </a>
-        <button ng-click="removeFromFollowers(follower.id)">&times;</button>
+        <button ng-click="removeFromFollowers(follower.id)" 
+          class="absolute top-0.5 right-0.5 py-0 px-2">
+          &times;
+        </button>
       </div>
     </div>
   </div>

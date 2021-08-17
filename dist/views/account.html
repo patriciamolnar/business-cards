@@ -1,54 +1,24 @@
 <div>
-  <h1>Update Your Profile</h1>
+  <h1 class="font-semibold text-xl mt-4 mb-2">
+    Update Your Profile
+  </h1>
+
   <!-- PROFILE IMAGE -->
-  <h2>Upload a profile pictures</h2>
-  <img ng-show="$storage.user.image"
-      ng-src="./uploads/{{$storage.user.image}}" 
-      alt="Profile Image of {{$storage.user.firstname}} {{$storage.user.lastname}}"
-      class="avatar">
-      
-  <form ng-submit="uploadImage()" novalidate>
-    <label for="profile-image">Select an image:</label>
-    <input type="file" name="profile-image" id="profile-image">
-    <button type="submit">Upload</button>
-  </form>
 
-  <!-- DETAILS -->
-  <h2>Edit your details</h2>
-  <!-- errors -->
-  <p ng-show="errors.includes('password')">
-    Please provide your password to save your changes.
-  </p>
-
-  <p ng-show="result.errors.includes('incorrect')">
-    Incorrect password provided. Please try again.
-  </p>
-
-  <p ng-show="result.errors.includes('noid') || result.errors.includes('sql')">
-    Unknown error. Please try again later or contact info@pmcoding.co.uk.
-  </p>
-
-  <p ng-show="result.errors.includes('nochange')">
-    No information was changed. 
-  </p>
-
-  <p ng-show="result.errors.includes('size')">
+  <!-- error messages -->
+  <p class="error" ng-show="result.errors.includes('size')">
     The image you uploaded is too big. The limit is 2MB.
   </p>
 
-  <p ng-show="result.errors.includes('size')">
-    The image you uploaded is too big. The limit is 2MB.
-  </p>
-
-  <p ng-show="result.errors.includes('type')">
+  <p class="error" ng-show="result.errors.includes('type')">
     Incorrect file format uploaded. Only JPGs and PNGs allowed.  
   </p>
 
-  <p ng-show="result.errors.includes('noimage')">
+  <p class="error" ng-show="result.errors.includes('noimage')">
     Please select an image to upload to proceed.  
   </p>
 
-  <p ng-show="result.errors.includes('generic')">
+  <p class="error" ng-show="result.errors.includes('generic')">
     There was an error uploading your profile image. Please try again later or contact info@pmcoding.co.uk. 
   </p>
 
@@ -56,11 +26,53 @@
     Your changes have been saved successfully.
   </p>
 
+  <!-- form -->
+  <section>
+    <h2 class="sr-only">Your Profile Image</h2>
+    <img ng-show="$storage.user.image"
+      ng-src="./uploads/{{$storage.user.image}}" 
+      alt="Profile Image of {{$storage.user.firstname}} {{$storage.user.lastname}}"
+      class="w-1/4 my-2">
+  
+    <form ng-submit="uploadImage()" novalidate>
+      <fieldset>
+        <label for="profile-image" class="mb-1 text-lg">Upload a profile picture</label>
+        <input type="file" name="profile-image" id="profile-image">
+      </fieldset>
+      <div class="text-right my-4">
+        <button type="submit">Upload</button>
+      </div>
+    </form>
+  </section>
+
+  <hr />
+  <!-- DETAILS -->
+
+  <!-- errors -->
+  <p class="error" ng-show="errors.includes('password')">
+    Please provide your password to save your changes.
+  </p>
+
+  <p class="error" ng-show="result.errors.includes('incorrect')">
+    Incorrect password provided. Please try again.
+  </p>
+
+  <p class="error" ng-show="result.errors.includes('noid') || result.errors.includes('sql')">
+    Unknown error. Please try again later or contact info@pmcoding.co.uk.
+  </p>
+
+  <p class="error" ng-show="result.errors.includes('nochange')">
+    No information was changed. 
+  </p>
+
   <!-- FORM -->
+  <h2 class="font-semibold my-1 text-lg">Edit your details</h2>
   <form name="myAccount" ng-submit="updateAccount()" novalidate>
     <!-- FIRST NAME -->
     <label for="firstname">First Name</label>
     <input type="text" id="firstname" name="firstname" autocomplete="family-name"
+      placeholder="Type in your firstname..."
+      class="mb-2"
       ng-model="user.core.firstname"
       ng-required="true"
       ng-minlength="2"
@@ -88,6 +100,8 @@
     <!-- LAST NAME -->
     <label for="lastname">Last Name</label>
     <input type="text" name="lastname" id="lastname" autocomplete="family-name"
+      placeholder="Type in your lastname..."
+      class="mb-2"
       ng-model="user.core.lastname"
       ng-required="true"
       ng-minlength="2"
@@ -115,6 +129,8 @@
     <!-- JOB TITLE -->
     <label for="jobtitle">Job Title</label>
     <input type="text" id="jobtitle" name="jobtitle" autocomplete="organization-title"
+      placeholder="Type in your job title..."
+      class="mb-2"
       ng-model="user.add.jobtitle"
       ng-pattern="regex.text"/>
 
@@ -125,6 +141,7 @@
     <!-- DESCRIPTION -->
     <label for="description">Description</label>
     <textarea id="description" name="description" cols="30" rows="10" 
+      class="mb-2"
       ng-model="user.add.description"
       ng-pattern="regex.text">
     </textarea>
@@ -144,6 +161,8 @@
     <!-- office -->
     <label for="office">Office</label>
     <input type="text" name="office" id="office" autocomplete="tel"
+      placeholder="Type in your office phone number..."
+      class="mb-2"
       ng-model="user.add.office"
       ng-pattern="regex.phone" />
 
@@ -154,6 +173,8 @@
     <!-- mobile -->
     <label for="mobile">Mobile</label>
     <input type="text" name="mobile" id="mobile" autocomplete="tel"
+      placeholder="Type in your mobile number..."
+      class="mb-2"
       ng-model="user.add.mobile"
       ng-pattern="regex.phone" />
     
@@ -164,6 +185,8 @@
     <!-- EMAIL -->
     <label for="email">Email</label>
     <input type="email" name="email" id="email" autocomplete="email"
+      placeholder="Type in your email..."
+      class="mb-2"
       ng-model="user.core.email"
       ng-required="true"
       ng-pattern="emailRegex" />
@@ -184,6 +207,8 @@
     <!-- WEBSITE -->
     <label for="website">Website</label>
     <input type="text" name="website" id="website" autocomplete="url"
+      placeholder="Type in your website address..."
+      class="mb-2"
       ng-model="user.add.website"
       ng-pattern="regex.url" />
 
@@ -194,6 +219,8 @@
     <!-- SOCIAL -->
     <label for="twitter">Twitter</label>
     <input type="text" name="twitter" id="twitter" 
+      placeholder="Type in your twitter..."
+      class="mb-2"
       ng-model="user.add.twitter"
       ng-pattern="regex.url" />
     
@@ -203,6 +230,8 @@
 
     <label for="instagram">Instagram</label>
     <input type="text" name="instagram" id="instagram" 
+      placeholder="Type in your Instagram..."
+      class="mb-2"
       ng-model="user.add.instagram"
       ng-pattern="regex.url" />
     
@@ -212,6 +241,8 @@
 
     <label for="facebook">Facebook</label>
     <input type="text" name="password" id="facebook" 
+      placeholder="Type in your Facebook..."
+      class="mb-2"
       ng-model="user.add.facebook"
       ng-pattern="regex.url" />
     
@@ -222,6 +253,8 @@
     <!-- PASSWORD -->
     <label for="password">Please verify your password to save your changes</label>
     <input type="password" name="password" id="password" autocomplete="current-password"
+      placeholder="Verify your password..."
+      class="mb-2"
       ng-model="password"
       ng-required="true" />
     
@@ -230,6 +263,8 @@
       Please enter a password.
     </p>
     
-    <button type="submit">Update</button>
+    <div class="text-right my-4">
+      <button type="submit">Save Changes</button>
+    </div>
   </form>
 </div>

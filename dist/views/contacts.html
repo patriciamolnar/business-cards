@@ -1,31 +1,43 @@
 <div>
   <!-- if user has no contacts & search -->
-  <h1>Your Contacts</h1>
+  <h1 class="font-semibold text-xl mt-4 mb-2">Your Contacts</h1>
   <div ng-show="error === 'none'">
-    <p>You have no contacts saved yet. Search for one below.</p>
+    <p class="font-medium">You have no contacts saved yet. Search for one below.</p>
 
-    <div ng-controller="SearchCtrl">
-      <form name="mySearch" ng-submit="searchUser()">
-        <label for="search">Search BZCards for contacts</label>
+    <div ng-controller="SearchCtrl" class="my-4">
+      <form name="mySearch" ng-submit="searchUser()" class="mb-4">
+        <label for="search">
+          Search for contacts
+        </label>
         <input type="text" id="search" name="search" placeholder="Type an email..."
           ng-model="searchTerm">
-        <button type="submit">Search</button>
-        <button type="reset" ng-click="resetSearch()">Reset</button>
+        <div class="text-right mt-2">
+          <button type="reset" ng-click="resetSearch()">Reset</button>
+          <button type="submit">Search</button>
+        </div> 
       </form>
   
       <div ng-show="user">
-        <p>Your result for {{ searchTerm }}:</p>
-        <a href="#!/profile/{{user.id}}">{{user.firstname}} {{user.lastname}}</a>
+        <p class="font-semibold">
+          Your result for <span class="font-medium">{{ searchTerm }}</span>:
+        </p>
+        <a href="#!/profile/{{user.id}}" class="flex gap-2 items-end bg-white border-none shadow-md p-1">
+          <img ng-show="user.image"
+            ng-src="uploads/{{user.image}}" 
+            alt="Image of {{user.firstname}} {{user.lastname}}"
+            class="avatar">
+          <span href="#!/profile/{{user.id}}" class="font-semibold">{{user.firstname}} {{user.lastname}}</span>
+        </a>
       </div>
   
       <div ng-if="error === 'nouser'">
-        <p>There is no account with {{ searchTerm }}.</p>
+        <p class="font-medium">There is no account with {{ searchTerm }}.</p>
       </div>
     </div>
   </div>
 
   <!-- internal error -->
-  <div ng-show="error === 'internal'">
+  <div class="error" ng-show="error === 'internal'">
     <p>An unknown error occurred. Please try again later or contact 
       <a href="mailto:info@pmcoding.co.uk">info@pmcoding.co.uk</a>.
     </p>
@@ -33,21 +45,23 @@
 
   <!-- Search Exisiting Contacts -->
   <div ng-show="contacts">
-    <p>People, whose contacts you saved: </p>
     <form>
-      <label for="search-contacts">Search contacts</label>
+      <label for="search-contacts">Search your saved contacts</label>
       <input type="text" id="search-contacts" ng-model="searchTerm">
     </form>
 
     <!-- List all contacts -->
-    <a ng-repeat="contact in contacts | filter:searchTerm" href="#!/profile/{{contact.id}}" class="block">
+    <p class="font-semibold">People, whose contacts you saved: </p>
+    <a ng-repeat="contact in contacts | filter:searchTerm" href="#!/profile/{{contact.id}}" class="block bg-white flex gap-2 border-none my-4 p-1 shadow-md">
       <img ng-show="contact.image"
         ng-src="uploads/{{contact.image}}" 
         alt="Image of {{contact.firstname}} {{contact.lastname}}"
-        class="w-16">
-      <span>{{contact.firstname}} {{contact.lastname}}</span>
-      <span>{{contact.jobtitle}}</span>
-      <span>{{contact.sector}}</span>
+        class="avatar">
+      <span>
+        <span class="font-semibold">{{contact.firstname}} {{contact.lastname}}</span><br />
+        <span class="font-medium text-sm">{{contact.jobtitle}}</span> <br />
+        <span class="text-xs">{{contact.sector}}</span>
+      </span>
     </a>
   </div>
 </div>

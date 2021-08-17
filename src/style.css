@@ -27,7 +27,7 @@
 
 @layer utilities {
   .avatar {
-    @apply w-12 rounded-md; 
+    @apply w-20 rounded-md; 
   }
 
   .button {
@@ -40,5 +40,9 @@
 
   .ng-invalid.ng-touched {
     @apply border-solid border-2 border-red-500; 
+  }
+
+  .sr-only {
+    @apply absolute -left-full w-px h-px top-auto overflow-hidden; 
   }
 }

@@ -4,20 +4,76 @@
       An error occurred. Please try again later or contact info@pmcoding.co.uk
     </p>
 
-    <button 
-      ng-click="saveContact(user.id)"
-      ng-show="btnMessage && $storage.loggedIn && ($storage.user.id !== user.id)">
-      {{ btnMessage }}
-    </button>
-    <img ng-show="user.image"
+    <div class="text-left mb-2">
+      <button 
+        ng-click="saveContact(user.id)"
+        ng-show="btnMessage && $storage.loggedIn && ($storage.user.id !== user.id)">
+        {{ btnMessage }}
+      </button>
+
+    </div>
+    <div class="flex gap-2">
+      <img ng-show="user.image"
       ng-src="uploads/{{user.image}}" alt="Image of {{ user.firstname }} {{ user.lastname }}"
-      class="avatar"
-    >
-    <h1>{{ user.firstname }} {{ user.lastname }}</h1>
-    <h2>{{ user.jobtitle }}</h2>
+      class="w-24 rounded-md">
+      <div>
+        <h1 class="font-semibold text-xl">{{ user.firstname }} {{ user.lastname }}</h1>
+        <h2 class="font-medium">{{ user.jobtitle }}</h2>
+        <p class="text-sm">{{ user.sector }}</p>
+      </div>
+    </div>
+    
     <p>{{ user.description }}</p>
-    <p>Sector: {{ user.sector }}</p>
-    <p>Email: {{ user.email }}</p>
+    
+    <p class="font-semibold my-4">Contact details: </p>
+    <p>
+      <svg class="inline-block w-6 h-6 fill-current text-purple-600">
+        <use href="#email"></use>
+      </svg>
+      <span>{{ user.email }}</span>
+    </p>
+
+    <p ng-show="user.website">
+      <svg class="inline-block w-6 h-6 fill-current text-purple-600">
+        <use href="#website"></use>
+      </svg>
+      <span>{{ user.website }}</span>
+    </p>
+
+    <p ng-show="user.office">
+      <svg class="inline-block w-6 h-6 fill-current text-purple-600">
+        <use href="#phone"></use>
+      </svg>
+      <span>{{ user.office }}</span>
+    </p>
+
+    <p ng-show="user.mobile">
+      <svg class="inline-block w-6 h-6 fill-current text-purple-600">
+        <use href="#mobile"></use>
+      </svg>
+      <span>{{ user.mobile }}</span>
+    </p>
+
+    <p ng-show="user.facebook">
+      <svg class="inline-block w-6 h-6 fill-current text-purple-600">
+        <use href="#facebook"></use>
+      </svg>
+      <span>{{ user.facebook }}</span>
+    </p>
+
+    <p ng-show="user.twitter">
+      <svg class="inline-block w-6 h-6 fill-current text-purple-600">
+        <use href="#twitter"></use>
+      </svg>
+      <span>{{ user.twitter }}</span>
+    </p>
+
+    <p ng-show="user.instagram">
+      <svg class="inline-block w-6 h-6 fill-current text-purple-600">
+        <use href="#instagram"></use>
+      </svg>
+      <span>{{ user.instagram }}</span>
+    </p>
   </div>
 
   <div ng-if="error === 'nouser'">
