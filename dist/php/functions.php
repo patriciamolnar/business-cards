@@ -127,8 +127,9 @@ function update_details($id, $jobtitle, $description, $sector, $office, $mobile,
 //search user from table: details 
 function search_user($key, $value) {
   require 'includes/connect.inc.php';
-  $sql = 'SELECT users.id, users.email, users.firstname, users.lastname, image.image 
+  $sql = 'SELECT users.id, users.email, users.firstname, users.lastname, details.jobtitle, image.image 
           FROM users
+          LEFT JOIN details ON users.id = details.uid
           LEFT JOIN image ON users.id = image.uid
           WHERE users.' . $key . ' = :value;'; 
   $stmt = $db->prepare($sql);

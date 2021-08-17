@@ -31,7 +31,10 @@
           ng-src="uploads/{{user.image}}" 
           alt="Image of {{user.firstname}} {{user.lastname}}"
           class="avatar">
-        <span href="#!/profile/{{user.id}}" class="font-semibold">{{user.firstname}} {{user.lastname}}</span>
+        <span>
+          <span class="font-semibold">{{user.firstname}} {{user.lastname}}</span><br />
+          <span class="font-medium text-sm">{{ user.jobtitle }}</span>
+        </span>
       </a>
     </div>
 
