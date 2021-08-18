@@ -28,7 +28,6 @@ myApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $l
       controller: 'ProfileCtrl', 
       resolve: {
         userDetails: function($http, $route) {
-          console.log($route.current.params.id); 
           return $http.get('php/includes/user.inc.php?id=' + $route.current.params.id)
             .then(function(response) {
               return response;
@@ -39,11 +38,29 @@ myApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $l
     })
     .when('/contacts', {
       templateUrl: 'views/contacts.html',
-      controller: 'ContactsCtrl'
+      controller: 'ContactsCtrl', 
+      resolve: {
+        contactsDetails: function($http, $localStorage) {
+          return $http.get('php/includes/get-contacts.inc.php?id=' + $localStorage.user.id)
+            .then(function(response) {
+              return response;
+            }
+          );
+        }
+      }
     })
     .when('/followers', {
       templateUrl: 'views/followers.html',
-      controller: 'FollowersCtrl'
+      controller: 'FollowersCtrl',
+      resolve: {
+        followersDetails: function($http, $localStorage) {
+          return $http.get('php/includes/get-followers.inc.php?id=' + $localStorage.user.id)
+            .then(function(response) {
+              return response;
+            }
+          );
+        }
+      }
     })
     .otherwise({
       redirectTo: '/'

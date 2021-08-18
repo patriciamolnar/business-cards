@@ -1,11 +1,9 @@
 const FollowersCtrl = angular.module('FollowersCtrl', []); 
 
-FollowersCtrl.controller('FollowersCtrl', function($scope, $http, $localStorage, handleResponse) {
+FollowersCtrl.controller('FollowersCtrl', function($scope, $http, $localStorage, handleResponse, followersDetails) {
 
-  //get all contacts from DB
-  $http.get('php/includes/get-followers.inc.php?id=' + $localStorage.user.id)
-    .then(response => handleResponse.handleResponse($scope, response, 'followers'))
-    .catch(error => console.log(error));
+  // updating scope from data received from resolve
+  handleResponse.handleResponse($scope, followersDetails, 'followers');   
 
   //allow user to unbook mark themselves.
   $scope.removeFromFollowers = function(id) {
