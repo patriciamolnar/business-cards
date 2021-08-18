@@ -1,25 +1,15 @@
 const ProfileCtrl = angular.module('ProfileCtrl', []);
 
-ProfileCtrl.controller('ProfileCtrl', function($scope, $http, $routeParams, $localStorage) {
-  
+ProfileCtrl.controller('ProfileCtrl', function($scope, $http, $routeParams, $localStorage, handleResponse) {  
   // query user data from DB on page load
   $http({
     url: 'php/includes/user.inc.php?id=' + $routeParams.id,
     method: 'GET'
   })
-  .then(function(response) {
-    $scope.user = response.data.user; 
-    console.log(response.data);
-    if(response.data.success === false) {
-      $scope.error = response.data.error;
-    }
-  })
-  .catch(function(error) {
-    console.log(error); 
-    $scope.error = error; 
-    throw error; 
-  });
- 
+  .then(response => handleResponse.handleResponse($scope, response, 'user'))
+  .catch(error => console.log(error));
+  
+  //if user is logged in, get appropriate text for 'Save Contact' button. 
   if($localStorage.loggedIn === true) {
     $http({
       url: 'php/includes/is-contact.inc.php?saved_user=' + $routeParams.id + '&saved_by=' + $localStorage.user.id,
@@ -37,6 +27,7 @@ ProfileCtrl.controller('ProfileCtrl', function($scope, $http, $routeParams, $loc
     });
   }
 
+  //save or unsave contact and update button text accordingly 
   $scope.saveContact = function(id) {
     $http({
       url: 'php/includes/save-contact.inc.php', 
