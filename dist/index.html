@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="myApp" ng-controller="AppCtrl">
+<html lang="en" class="h-full" ng-app="myApp" ng-controller="AppCtrl">
 <head>
   <!-- <base href="/bzcards/dist/"> -->
   <meta charset="UTF-8">
@@ -31,7 +31,7 @@
   <link rel="stylesheet" href="css/style.css">
   <title>BZ Cards</title>
 </head>
-<body class="font-quicksand bg-gray-50 p-2 mx-2">
+<body class="font-quicksand bg-gray-50 p-2 mx-2 h-full flex flex-col">
   <header class="flex justify-between items-center">
     <a href="#!/dashboard"
     class="text-4xl border-none font-styleScript font-medium ">
@@ -77,9 +77,9 @@
     </div>
   </header>
 
-  <main ng-view></main>
+  <main class="flex-auto" ng-view></main>
 
-  <footer>
+  <footer class="flex-shrink-0">
     <p>A project lovingly coded by <a href="https://www.patriciamolnar.com/">patricia molnar</a>.</p>
 
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" style="display:none">
