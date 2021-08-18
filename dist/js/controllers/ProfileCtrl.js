@@ -1,13 +1,8 @@
 const ProfileCtrl = angular.module('ProfileCtrl', []);
 
-ProfileCtrl.controller('ProfileCtrl', function($scope, $http, $routeParams, $localStorage, handleResponse) {  
-  // query user data from DB on page load
-  $http({
-    url: 'php/includes/user.inc.php?id=' + $routeParams.id,
-    method: 'GET'
-  })
-  .then(response => handleResponse.handleResponse($scope, response, 'user'))
-  .catch(error => console.log(error));
+ProfileCtrl.controller('ProfileCtrl', function($scope, $http, $routeParams, $localStorage, handleResponse, userDetails) {  
+  //update scope based on response received from $http call in resolve
+  handleResponse.handleResponse($scope, userDetails, 'user'); 
   
   //if user is logged in, get appropriate text for 'Save Contact' button. 
   if($localStorage.loggedIn === true) {

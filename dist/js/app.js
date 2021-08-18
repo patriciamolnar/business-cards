@@ -18,13 +18,6 @@ myApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $l
     })
     .when('/dashboard', {
       templateUrl: 'views/dashboard.html',
-      // resolve: {
-      //   'checkLoggedIn': function($location, $rootScope) {
-      //     if(!$rootScope.$storage.loggedIn) {
-      //       $location.path('/login'); 
-      //     }
-      //   }
-      // }
     })
     .when('/account', {
       templateUrl: 'views/account.html',
@@ -32,7 +25,17 @@ myApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $l
     })
     .when('/profile/:id', {
       templateUrl: 'views/profile-id.html',
-      controller: 'ProfileCtrl'
+      controller: 'ProfileCtrl', 
+      resolve: {
+        userDetails: function($http, $route) {
+          console.log($route.current.params.id); 
+          return $http.get('php/includes/user.inc.php?id=' + $route.current.params.id)
+            .then(function(response) {
+              return response;
+            }
+          );
+        }
+      }
     })
     .when('/contacts', {
       templateUrl: 'views/contacts.html',
@@ -124,7 +127,7 @@ myApp.service('validationService', function() {
 myApp.service('handleResponse', function() {
 
   function handleResponse($scope, response, key) {
-    $scope.followers = null; 
+    $scope[key] = null; 
     $scope.error = null; 
     
     if(response.data.success === true) {
