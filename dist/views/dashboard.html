@@ -6,43 +6,9 @@
       class="avatar">
     <h1 class="font-semibold text-lg">Welcome {{$storage.user.firstname}}!</h1>
   </div>
-
   <hr />
 
-  <div ng-controller="SearchCtrl" class="my-4">
-    <form name="mySearch" ng-submit="searchUser()" class="mb-4">
-      <label for="search">
-        Search for contacts
-      </label>
-      <input type="text" id="search" name="search" placeholder="Type an email..."
-        ng-model="searchTerm">
-      <div class="text-right mt-2">
-        <button type="reset" ng-click="resetSearch()">Reset</button>
-        <button type="submit">Search</button>
-      </div> 
-    </form>
-
-    <div ng-show="user">
-      <p class="font-semibold">
-        Search result:
-      </p>
-      <a href="#!/profile/{{user.id}}" class="flex gap-2 items-end bg-white border-none shadow-md p-1">
-        <img ng-show="user.image"
-          ng-src="uploads/{{user.image}}" 
-          alt="Image of {{user.firstname}} {{user.lastname}}"
-          class="avatar">
-        <span>
-          <span class="font-semibold">{{user.firstname}} {{user.lastname}}</span><br />
-          <span class="font-medium text-sm">{{ user.jobtitle }}</span>
-        </span>
-      </a>
-    </div>
-
-    <div ng-if="error === 'nouser'">
-      <p class="font-semibold">No account found.</p>
-    </div>
-  </div>
-
+  <search-component></search-component>
   <hr /> 
 
   <div class="my-4">
