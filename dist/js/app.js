@@ -119,3 +119,21 @@ myApp.service('validationService', function() {
     return phoneRegex; 
   }
 }); 
+
+//handle updating scope after http call.
+myApp.service('handleResponse', function() {
+
+  function handleResponse($scope, response, key) {
+    $scope.followers = null; 
+    $scope.error = null; 
+    
+    if(response.data.success === true) {
+      $scope[key] = response.data[key]; 
+      $scope.error = ''; 
+    } else {
+      $scope.error = response.data.error; 
+    }
+  }
+
+  this.handleResponse = handleResponse; 
+})

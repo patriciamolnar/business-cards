@@ -1,20 +1,11 @@
 const FollowersCtrl = angular.module('FollowersCtrl', []); 
 
-FollowersCtrl.controller('FollowersCtrl', function($scope, $http, $localStorage) {
+FollowersCtrl.controller('FollowersCtrl', function($scope, $http, $localStorage, handleResponse) {
+
   //get all contacts from DB
   $http.get('php/includes/get-followers.inc.php?id=' + $localStorage.user.id)
-    .then(function(response) {
-      if(response.data.success === true) {
-        $scope.followers = response.data.followers; 
-        $scope.error = ''; 
-      } else {
-        $scope.error = response.data.error; 
-      }
-    })
-    .catch(function(error) {
-      console.log(error); 
-      $scope.error = error; 
-    });
+    .then(response => handleResponse.handleResponse($scope, response, 'followers'))
+    .catch(error => console.log(error));
 
   //allow user to unbook mark themselves.
   $scope.removeFromFollowers = function(id) {
@@ -26,17 +17,8 @@ FollowersCtrl.controller('FollowersCtrl', function($scope, $http, $localStorage)
         saved_by: id
       }
     })
-    .then(function(response) {
-      if(response.data.success === true) {
-        $scope.followers = response.data.followers; 
-        $scope.error = ''; 
-      } else {
-        $scope.error = response.data.error; 
-      } 
-    })
-    .catch(function(error) {
-      $scope.error = error;
-    });
+    .then(response => handleResponse.handleResponse($scope, response, 'followers'))
+    .catch(error => console.log(error));
   }
 });
 
