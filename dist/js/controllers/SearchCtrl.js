@@ -1,6 +1,6 @@
 const SearchCtrl = angular.module('SearchCtrl', []); 
 
-SearchCtrl.controller('SearchCtrl', function($scope, $http) {
+SearchCtrl.controller('SearchCtrl', function($scope, $http, handleResponse) {
   $scope.searchTerm = ''; 
 
   $scope.searchUser = function() {
@@ -8,20 +8,11 @@ SearchCtrl.controller('SearchCtrl', function($scope, $http) {
       url: 'php/includes/search-user.inc.php?search=' + $scope.searchTerm,
       method: 'GET', 
     })
-    .then(function(response) {
-      if(response.data.success === true) {
-        $scope.user = response.data.user;
-        $scope.error = '';
-      } else {
-        $scope.error = response.data.error;
-      }
-      
+    .then(response => {
+      handleResponse.handleResponse($scope, response, 'user');
       $scope.searchTerm = ''; 
     })
-    .catch(function(error) {
-      console.log(error);  
-      throw error;
-    })
+    .catch(error => console.log(error)); 
   }
 
   $scope.resetSearch = function() {
