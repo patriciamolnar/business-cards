@@ -1,9 +1,10 @@
 <div>
   <div class="my-4 flex gap-2 items-end">
-    <img ng-show="$storage.user.image"
-      ng-src="./uploads/{{$storage.user.image}}" 
-      alt="Profile Image of {{$storage.user.firstname}} {{$storage.user.lastname}}"
-      class="avatar">
+    <a href="#!/profile/{{$storage.user.id}}" class="border-none">
+      <img ng-show="$storage.user.image"
+        ng-src="./uploads/{{$storage.user.image}}" 
+        alt="Profile Image of {{$storage.user.firstname}} {{$storage.user.lastname}}"
+        class="avatar"></a>
     <h1 class="font-semibold text-lg">Welcome {{$storage.user.firstname}}!</h1>
   </div>
   <hr />
