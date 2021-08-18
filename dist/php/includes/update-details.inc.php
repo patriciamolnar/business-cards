@@ -3,7 +3,7 @@ require_once '../functions.php';
 
 if(!request_is_post()) {
   echo json_encode([
-    'success' => false, 
+    'successDetails' => false, 
     'error' => 'Received request has incorrect format.'
   ]);
   exit(); 
@@ -12,13 +12,12 @@ if(!request_is_post()) {
   $dataArr = json_decode($postJSON, TRUE); 
 
   $id = $dataArr['id'] ?? null;
-  $password = $dataArr['password'] ?? null; 
   
   //check if id / password is empty
-  if(empty(trim($id)) || empty(trim($password))) { 
+  if(empty(trim($id))) { 
     echo json_encode([
-      'success' => false, 
-      'errors' => 'noid'
+      'successDetails' => false, 
+      'errors' => 'unknown'
     ]);
     exit(); 
   }
@@ -27,21 +26,11 @@ if(!request_is_post()) {
   $user = get_account_info('*', 'users', 'id', $id);
   if(!$user) {
     echo json_encode([
-      'success' => false, 
-      'errors' => 'noid'
+      'successDetails' => false, 
+      'errors' => 'unknown'
     ]);
     exit(); 
-  } 
-
-  //verify password 
-  $password_check = password_verify($password, $user['password']);
-  if(!$password_check) {
-    echo json_encode([
-      'success' => false, 
-      'errors' => 'incorrect'
-    ]);
-    exit();
-  } 
+  }  
 
   //get input
   $jobtitle = empty($dataArr['details']['jobtitle']) ? null: trim($dataArr['details']['jobtitle']);
@@ -61,7 +50,7 @@ if(!request_is_post()) {
     $success = update_details($id, $jobtitle, $description, $sector, $office, $mobile, $website, $twitter, $instagram, $facebook);
     if($success) {
       echo json_encode([
-        'success' => true, 
+        'successDetails' => true, 
         'errors' => '', 
         'user' => array(
           'jobtitle' => $jobtitle, 
@@ -77,15 +66,15 @@ if(!request_is_post()) {
       ]);
     } else { //data was not successfully saved to DB
       echo json_encode([
-        'success' => false, 
-        'error' => 'unknown1'
+        'successDetails' => false, 
+        'error' => 'unknown'
       ]);
     }
   } else { //create row
     $success = set_details($id, $jobtitle, $description, $sector, $office, $mobile, $website, $twitter, $instagram, $facebook);
     if($success) {
       echo json_encode([
-        'success' => true, 
+        'successDetails' => true, 
         'errors' => '', 
         'user' => array(
           'jobtitle' => $jobtitle, 
@@ -101,8 +90,8 @@ if(!request_is_post()) {
       ]);
     } else { //data was not successfully saved to DB
       echo json_encode([
-        'success' => false, 
-        'error' => 'unknown2'
+        'successDetails' => false, 
+        'error' => 'unknown'
       ]);
     }
   }

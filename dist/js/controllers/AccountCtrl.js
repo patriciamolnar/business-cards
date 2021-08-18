@@ -61,15 +61,33 @@ AccountCtrl.controller('AccountCtrl', function($scope, $rootScope, validationSer
 
   $scope.password = ''; 
 
-  $scope.result = null; 
-  $scope.errors = []; 
-
   $scope.updateAccount = function() {
+    $scope.result = null; 
+    $scope.errors = []; 
+
     //check if password has been provided.
     if(!$scope.password.trim()) {
       $scope.errors.push('password'); 
       $scope.password = '';
       return; 
+    }
+
+    //email: check correct format
+    if(!$scope.regex.email.test($scope.user.core.email)) {
+      $scope.user.email = u.email; 
+      return;
+    }
+
+    //firstname: check correct format
+    if(!$scope.regex.string.test($scope.user.core.firstname)) {
+      $scope.user.firstname = u.firstname; 
+      return;
+    }
+
+    //lastname: check correct format
+    if(!$scope.regex.string.test($scope.user.core.lastname)) {
+      $scope.user.lastname = u.lastname; 
+      return;
     }
   
     //CORE VALUES: check if firstname/lastname/email have changed. 
@@ -91,28 +109,37 @@ AccountCtrl.controller('AccountCtrl', function($scope, $rootScope, validationSer
         }
       })
       .then(function(response) {
-        $scope.result = response.data;
-
         //save updated details to localStorage
-        for (const [key, value] of Object.entries($scope.result.user)) {
-          $localStorage.user[key] = value; 
-        }
+        if(response.data.success === true) {
+          $scope.result = response.data;
 
-        $scope.errors = []; 
-
-        return response.data;
+          for (const [key, value] of Object.entries($scope.result.user)) {
+            $localStorage.user[key] = value; 
+          } 
+        } else {
+          $scope.errors.push(response.data.error); 
+        } 
       })
       .catch(function(error) {
         console.log(error);  
         throw error;
       })
+    } else {
+      $scope.errors.push('nochange');
     }
+  }
 
-    //ADDITIONAL VALUES
+  //ADDITIONAL DETAILS
+  $scope.updateDetails = function() {
+    //reset scope
+    $scope.result = null; 
+    $scope.errors = [];  
+
+    //check if any of details were changed
     let detailsChanged = false;
 
     for (const [key, value] of Object.entries($scope.user.add)) {
-      if(value !== u[key] || value !== null || value !== '') {
+      if(value !== u[key]) {
         detailsChanged = true; 
         break; 
       }
@@ -129,19 +156,17 @@ AccountCtrl.controller('AccountCtrl', function($scope, $rootScope, validationSer
         }
       })
       .then(function(response) {
-        $scope.result = response.data;
-        //save updated details to localStorage
-        if($scope.result.success) {
+        if(response.data.success === true) {
+          $scope.result = response.data;
           for (const [key, value] of Object.entries($scope.result.user)) {
             $localStorage.user[key] = value; 
           }
-  
-          $scope.errors = []; 
-        } 
+        } else {
+          $scope.errors.push(response.data.error); 
+        }
 
         $scope.password = ''; //update done, reset password
         $scope.myAccount.$setUntouched(); //set form to untouched state so no error msgs are showing
-        return response.data;
       })
       .catch(function(error) {
         $scope.password = '';
@@ -149,12 +174,15 @@ AccountCtrl.controller('AccountCtrl', function($scope, $rootScope, validationSer
         throw error;
       })
     } else { //there are no changes, reset password
+      $scope.errors.push('nochangedetails'); 
       $scope.password = '';
     }
   }
 
   //let user upload new profile image
   $scope.uploadImage = function() {
+    $scope.errors = []; 
+
     let fd = new FormData();
     const files = document.getElementById('profile-image').files[0];
     fd.append('file', files);
@@ -167,10 +195,14 @@ AccountCtrl.controller('AccountCtrl', function($scope, $rootScope, validationSer
       headers: {'Content-Type': undefined},
     })
     .then(function(response) { 
-      $localStorage.user.image = response.data.url;  
+      if(response.data.success) {
+        $localStorage.user.image = response.data.url; 
+      } else {
+        $scope.errors.push(response.data.error); 
+      }
     })
     .catch(function(error) {
-      $scope.errors.push(error); 
+      console.log(error);
     });
   }
 }); 

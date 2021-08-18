@@ -4,267 +4,283 @@
   </h1>
 
   <!-- PROFILE IMAGE -->
-
-  <!-- error messages -->
-  <p class="error" ng-show="result.errors.includes('size')">
-    The image you uploaded is too big. The limit is 2MB.
-  </p>
-
-  <p class="error" ng-show="result.errors.includes('type')">
-    Incorrect file format uploaded. Only JPGs and PNGs allowed.  
-  </p>
-
-  <p class="error" ng-show="result.errors.includes('noimage')">
-    Please select an image to upload to proceed.  
-  </p>
-
-  <p class="error" ng-show="result.errors.includes('generic')">
-    There was an error uploading your profile image. Please try again later or contact info@pmcoding.co.uk. 
-  </p>
-
-  <p class="success-message" ng-show="result.success">
-    Your changes have been saved successfully.
-  </p>
-
-  <!-- form -->
-  <section>
-    <h2 class="sr-only">Your Profile Image</h2>
-    <img ng-show="$storage.user.image"
-      ng-src="./uploads/{{$storage.user.image}}" 
-      alt="Profile Image of {{$storage.user.firstname}} {{$storage.user.lastname}}"
-      class="w-1/4 my-2">
+  <div>
+    <!-- error messages -->
+    <p class="error" ng-show="errors.includes('size')">
+      The image you uploaded is too big. The limit is 2MB.
+    </p>
   
-    <form ng-submit="uploadImage()" novalidate>
-      <fieldset>
-        <label for="profile-image" class="mb-1 text-lg">Upload a profile picture</label>
-        <input type="file" name="profile-image" id="profile-image">
-      </fieldset>
-      <div class="text-right my-4">
-        <button type="submit">Upload</button>
-      </div>
-    </form>
-  </section>
-
+    <p class="error" ng-show="errors.includes('type')">
+      Incorrect file format uploaded. Only JPGs and PNGs allowed.  
+    </p>
+  
+    <p class="error" ng-show="errors.includes('noimage')">
+      Please select an image to upload.  
+    </p>
+  
+    <p class="error" ng-show="errors.includes('generic')">
+      There was an error uploading your profile image. Please try again later or contact info@pmcoding.co.uk. 
+    </p>
+  
+    <!-- form -->
+    <section>
+      <h2 class="sr-only">Your Profile Image</h2>
+      <img ng-show="$storage.user.image"
+        ng-src="./uploads/{{$storage.user.image}}" 
+        alt="Profile Image of {{$storage.user.firstname}} {{$storage.user.lastname}}"
+        class="w-1/4 my-2">
+    
+      <form ng-submit="uploadImage()" novalidate>
+        <fieldset>
+          <label for="profile-image" class="mb-1 text-lg">Upload a profile picture</label>
+          <input type="file" name="profile-image" id="profile-image">
+        </fieldset>
+        <div class="text-right my-4">
+          <button type="submit">Upload</button>
+        </div>
+      </form>
+    </section>  
+  </div>
   <hr />
   <!-- DETAILS -->
 
-  <!-- errors -->
-  <p class="error" ng-show="errors.includes('password')">
-    Please provide your password to save your changes.
-  </p>
+  <!-- ACCOUNT DETAILS FORM -->
+  <section>
+    <h2 class="font-semibold my-1 text-lg">Account Details</h2>
 
-  <p class="error" ng-show="result.errors.includes('incorrect')">
-    Incorrect password provided. Please try again.
-  </p>
+    <form name="myAccount" ng-submit="updateAccount()" novalidate>
+      <!-- FIRST NAME -->
+      <label for="firstname">First Name</label>
+      <input type="text" id="firstname" name="firstname" autocomplete="family-name"
+        placeholder="Type in your firstname..."
+        class="mb-2"
+        ng-model="user.core.firstname"
+        ng-required="true"
+        ng-minlength="2"
+        ng-pattern="regex.string"/>
 
-  <p class="error" ng-show="result.errors.includes('noid') || result.errors.includes('sql')">
-    Unknown error. Please try again later or contact info@pmcoding.co.uk.
-  </p>
+      <!-- error: firstname missing -->
+      <p class="error"
+        ng-show="(myAccount.firstname.$error.required && myAccount.firstname.$touched) || errors.includes('firstname')">
+        Please fill in your first name.
+      </p>
 
-  <p class="error" ng-show="result.errors.includes('nochange')">
-    No information was changed. 
-  </p>
+      <!-- error: firstname too short -->
+      <p class="error"
+        ng-show="myAccount.firstname.$error.minlength && myAccount.firstname.$touched">
+        Your first name must be at least 2 characters long. 
+      </p>
 
-  <!-- FORM -->
-  <h2 class="font-semibold my-1 text-lg">Edit your details</h2>
-  <form name="myAccount" ng-submit="updateAccount()" novalidate>
-    <!-- FIRST NAME -->
-    <label for="firstname">First Name</label>
-    <input type="text" id="firstname" name="firstname" autocomplete="family-name"
-      placeholder="Type in your firstname..."
-      class="mb-2"
-      ng-model="user.core.firstname"
-      ng-required="true"
-      ng-minlength="2"
-      ng-pattern="regex.string"/>
+      <!-- error: firstname has invalid chars -->
+      <p class="error"
+        ng-show="mySignup.firstname.$error.pattern 
+          && mySignup.firstname.$touched">
+        The first name you entered is invalid.  
+      </p>
 
-    <!-- error: firstname missing -->
-    <p class="error"
-      ng-show="myAccount.firstname.$error.required && myAccount.firstname.$touched">
-      Please fill in your first name.
+      <!-- LAST NAME -->
+      <label for="lastname">Last Name</label>
+      <input type="text" name="lastname" id="lastname" autocomplete="family-name"
+        placeholder="Type in your lastname..."
+        class="mb-2"
+        ng-model="user.core.lastname"
+        ng-required="true"
+        ng-minlength="2"
+        ng-pattern="regex.string"/>
+
+      <!-- error: lastname missing -->
+      <p class="error"
+        ng-show="(myAccount.lastname.$error.required && myAccount.lastname.$touched) || errors.includes('lastname')">
+        Please fill in your last name.
+      </p>
+
+      <!-- error: lastname too short -->
+      <p class="error"
+        ng-show="myAccount.lastname.$error.minlength && myAccount.lastname.$touched">
+        Your last name must be at least 2 characters long. 
+      </p>
+
+      <!-- error: lastname has invalid chars -->
+      <p class="error"
+        ng-show="myAccount.lastname.$error.pattern 
+          && myAccount.lastname.$touched">
+        The last name you entered is invalid.  
+      </p>
+
+      <!-- EMAIL -->
+      <label for="email">Email</label>
+      <input type="email" name="email" id="email" autocomplete="email"
+        placeholder="Type in your email..."
+        class="mb-2"
+        ng-model="user.core.email"
+        ng-required="true"
+        ng-pattern="emailRegex" />
+
+      <!-- email missing -->  
+      <p class="error" 
+        ng-show="myAccount.email.$error.required && myAccount.email.$touched">
+        Please enter an email.
+      </p>
+
+      <!-- email incorrect format -->
+      <p class="error"
+        ng-show="myAccount.email.$error.pattern 
+          && myAccount.email.$touched">
+        The email you provided is not valid.
+      </p>
+
+      <!-- PASSWORD -->
+      <label for="password">Please verify your password to save your changes</label>
+      <input type="password" name="password" id="password" autocomplete="current-password"
+        placeholder="Verify your password..."
+        class="mb-2"
+        ng-model="password"
+        ng-required="true" />
+      
+      <p class="error" 
+        ng-show="(myAccount.password.$error.required && myAccount.password.$touched) || errors.includes('password')">
+        Please enter a password.
+      </p>
+      
+      <div class="text-right my-4">
+        <button type="submit" ng-disabled="myAccount.$invalid">Update</button>
+      </div>
+    </form>
+    <!--success-->
+    <p class="success-message" ng-show="result.success">Changes successfully changed.</p>
+
+    <!--error-->
+    <p class="error" ng-show="errors.includes('nochange')">No data has been changed.</p>
+    <p class="error" ng-show="errors.includes('email')">
+      The new email has already been taken. 
+    </p>
+    <p class="error" ng-show="errors.includes('incorrect')">
+      The provided password is incorrect. 
+    </p>
+    <p class="error" ng-show="errors.includes('internal')">
+      An unknown error occurred. Please try again or contact info@pmcoding.co.uk.  
+    </p>
+  </section>
+  <hr />
+
+  <!-- ADDITIONAL DETAILS -->
+  <section>
+    <h2 class="font-semibold my-1 text-lg">Add additional information</h2>
+    <form name="myDetails" ng-submit="updateDetails()" novalidate>
+      <!-- JOB TITLE -->
+      <label for="jobtitle">Job Title</label>
+      <input type="text" id="jobtitle" name="jobtitle" autocomplete="organization-title"
+        placeholder="Type in your job title..."
+        class="mb-2"
+        ng-model="user.add.jobtitle"
+        ng-pattern="regex.text"/>
+
+      <p class="error" ng-show="myDetails.jobtitle.$invalid && myDetails.jobtitle.$touched">
+        The job title you entered contains invalid characters.
+      </p>
+
+      <!-- DESCRIPTION -->
+      <label for="description">Description</label>
+      <textarea id="description" name="description" cols="30" rows="10" 
+        class="mb-2"
+        ng-model="user.add.description"
+        ng-pattern="regex.text">
+      </textarea>
+
+      <p class="error" ng-show="myDetails.description.$invalid && myDetails.description.$touched">
+        The description you entered contains invalid characters.
+      </p>
+
+      <!-- SECTOR -->
+      <label for="sector">Sector</label>
+      <select id="sector" name="sector" ng-model="user.add.sector">
+        <option ng-repeat="sector in sectors" value="{{sector}}">{{sector}}</option>
+      </select>
+
+      <!-- PHONE NUMBERS -->
+      <!-- office -->
+      <label for="office">Office</label>
+      <input type="text" name="office" id="office" autocomplete="tel"
+        placeholder="Type in your office phone number..."
+        class="mb-2"
+        ng-model="user.add.office"
+        ng-pattern="regex.phone" />
+
+      <p class="error" ng-show="myDetails.office.$invalid && myDetails.office.$touched">
+        The phone number you entered is invalid. It can only contains numbers.
+      </p>
+
+      <!-- mobile -->
+      <label for="mobile">Mobile</label>
+      <input type="text" name="mobile" id="mobile" autocomplete="tel"
+        placeholder="Type in your mobile number..."
+        class="mb-2"
+        ng-model="user.add.mobile"
+        ng-pattern="regex.phone" />
+      
+      <p class="error" ng-show="myDetails.mobile.$invalid && myDetails.mobile.$touched">
+        The mobile number you entered is invalid. It can only contains numbers.
+      </p>
+
+      <!-- WEBSITE -->
+      <label for="website">Website</label>
+      <input type="text" name="website" id="website" autocomplete="url"
+        placeholder="Type in your website address..."
+        class="mb-2"
+        ng-model="user.add.website"
+        ng-pattern="regex.url" />
+
+      <p class="error" ng-show="myDetails.website.$invalid && myDetails.website.$touched">
+        The website address you entered is invalid.
+      </p>
+
+      <!-- SOCIAL -->
+      <label for="twitter">Twitter</label>
+      <input type="text" name="twitter" id="twitter" 
+        placeholder="www.twitter.com/your-username"
+        class="mb-2"
+        ng-model="user.add.twitter"
+        ng-pattern="regex.url" />
+      
+      <p class="error" ng-show="myDetails.twitter.$invalid && myDetails.twitter.$touched">
+        The URL provided for your Twitter account is invalid. Ensure the URL starts with 'www' or 'https://'.
+      </p>
+
+      <label for="instagram">Instagram</label>
+      <input type="text" name="instagram" id="instagram" 
+        placeholder="www.instagram.com/your-username"
+        class="mb-2"
+        ng-model="user.add.instagram"
+        ng-pattern="regex.url" />
+      
+      <p class="error" ng-show="myDetails.instagram.$invalid && myDetails.instagram.$touched">
+        The URL provided for your Instagram account is invalid. Ensure the URL starts with 'www' or 'https://'.
+      </p>
+
+      <label for="facebook">Facebook</label>
+      <input type="text" name="password" id="facebook" 
+        placeholder="www.facebook.com/your-username"
+        class="mb-2"
+        ng-model="user.add.facebook"
+        ng-pattern="regex.url" />
+      
+      <p class="error" ng-show="myDetails.facebook.$invalid && myDetails.facebook.$touched">
+        The URL provided for your Facebook account is invalid. Ensure the URL starts with 'www' or 'https://'.
+      </p>
+
+      <div class="text-right my-4">
+        <button type="submit" ng-disabled="myDetails.$invalid">Save</button>
+      </div>
+    </form>
+
+    <p class="success-message" ng-show="result.successDetails">
+      Changes successfully changed.
     </p>
 
-    <!-- error: firstname too short -->
-    <p class="error"
-      ng-show="myAccount.firstname.$error.minlength && myAccount.firstname.$touched">
-      Your first name must be at least 2 characters long. 
+    <p class="error" ng-show="errors.includes('nochangedetails')">No details has been changed.</p>
+
+    <p class="error" ng-show="errors.includes('unknown')">
+      An error occurred. Please try again later or contact info@pmcoding.co.uk. 
     </p>
-
-    <!-- error: firstname has invalid chars -->
-    <p class="error"
-      ng-show="mySignup.firstname.$error.pattern 
-        && mySignup.firstname.$touched">
-      The first name you entered is invalid.  
-    </p>
-
-    <!-- LAST NAME -->
-    <label for="lastname">Last Name</label>
-    <input type="text" name="lastname" id="lastname" autocomplete="family-name"
-      placeholder="Type in your lastname..."
-      class="mb-2"
-      ng-model="user.core.lastname"
-      ng-required="true"
-      ng-minlength="2"
-      ng-pattern="regex.string"/>
-
-    <!-- error: lastname missing -->
-    <p class="error"
-      ng-show="myAccount.lastname.$error.required && myAccount.lastname.$touched">
-      Please fill in your last name.
-    </p>
-
-    <!-- error: lastname too short -->
-    <p class="error"
-      ng-show="myAccount.lastname.$error.minlength && myAccount.lastname.$touched">
-      Your last name must be at least 2 characters long. 
-    </p>
-
-    <!-- error: lastname has invalid chars -->
-    <p class="error"
-      ng-show="myAccount.lastname.$error.pattern 
-        && myAccount.lastname.$touched">
-      The last name you entered is invalid.  
-    </p>
-
-    <!-- JOB TITLE -->
-    <label for="jobtitle">Job Title</label>
-    <input type="text" id="jobtitle" name="jobtitle" autocomplete="organization-title"
-      placeholder="Type in your job title..."
-      class="mb-2"
-      ng-model="user.add.jobtitle"
-      ng-pattern="regex.text"/>
-
-    <p class="error" ng-show="myAccount.jobtitle.$invalid && myAccount.jobtitle.$touched">
-      The job title you entered contains invalid characters.
-    </p>
-
-    <!-- DESCRIPTION -->
-    <label for="description">Description</label>
-    <textarea id="description" name="description" cols="30" rows="10" 
-      class="mb-2"
-      ng-model="user.add.description"
-      ng-pattern="regex.text">
-    </textarea>
-
-    <p class="error" ng-show="myAccount.description.$invalid && myAccount.description.$touched">
-      The description you entered contains invalid characters.
-    </p>
-
-    <!-- SECTOR -->
-    <label for="sector">Sector</label>
-    <select id="sector" name="sector" ng-model="user.add.sector">
-      <option ng-repeat="sector in sectors" value="{{sector}}">{{sector}}</option>
-    </select>
-
-    <!-- PHONE NUMBERS -->
-
-    <!-- office -->
-    <label for="office">Office</label>
-    <input type="text" name="office" id="office" autocomplete="tel"
-      placeholder="Type in your office phone number..."
-      class="mb-2"
-      ng-model="user.add.office"
-      ng-pattern="regex.phone" />
-
-    <p class="error" ng-show="myAccount.office.$invalid && myAccount.office.$touched">
-      The phone number you entered is invalid. It can only contains numbers.
-    </p>
-
-    <!-- mobile -->
-    <label for="mobile">Mobile</label>
-    <input type="text" name="mobile" id="mobile" autocomplete="tel"
-      placeholder="Type in your mobile number..."
-      class="mb-2"
-      ng-model="user.add.mobile"
-      ng-pattern="regex.phone" />
-    
-    <p class="error" ng-show="myAccount.mobile.$invalid && myAccount.mobile.$touched">
-      The mobile number you entered is invalid. It can only contains numbers.
-    </p>
-
-    <!-- EMAIL -->
-    <label for="email">Email</label>
-    <input type="email" name="email" id="email" autocomplete="email"
-      placeholder="Type in your email..."
-      class="mb-2"
-      ng-model="user.core.email"
-      ng-required="true"
-      ng-pattern="emailRegex" />
-
-    <!-- email missing -->  
-    <p class="error" 
-      ng-show="myAccount.email.$error.required && myAccount.email.$touched">
-      Please enter a valid email.
-    </p>
-
-    <!-- email incorrect format -->
-    <p class="error"
-      ng-show="myAccount.email.$error.pattern 
-        && myAccount.email.$touched">
-      The email you provided is not valid.
-    </p>
-
-    <!-- WEBSITE -->
-    <label for="website">Website</label>
-    <input type="text" name="website" id="website" autocomplete="url"
-      placeholder="Type in your website address..."
-      class="mb-2"
-      ng-model="user.add.website"
-      ng-pattern="regex.url" />
-
-    <p class="error" ng-show="myAccount.website.$invalid && myAccount.website.$touched">
-      The website address you entered is invalid.
-    </p>
-
-    <!-- SOCIAL -->
-    <label for="twitter">Twitter</label>
-    <input type="text" name="twitter" id="twitter" 
-      placeholder="www.twitter.com/your-username"
-      class="mb-2"
-      ng-model="user.add.twitter"
-      ng-pattern="regex.url" />
-    
-    <p class="error" ng-show="myAccount.twitter.$invalid && myAccount.twitter.$touched">
-      The URL provided to your Twitter account is invalid. Ensure the URL starts with 'www' or 'https'.
-    </p>
-
-    <label for="instagram">Instagram</label>
-    <input type="text" name="instagram" id="instagram" 
-      placeholder="www.instagram.com/your-username"
-      class="mb-2"
-      ng-model="user.add.instagram"
-      ng-pattern="regex.url" />
-    
-    <p class="error" ng-show="myAccount.instagram.$invalid && myAccount.instagram.$touched">
-      The URL provided to your Instagram account is invalid. Ensure the URL starts with 'www' or 'https'.
-    </p>
-
-    <label for="facebook">Facebook</label>
-    <input type="text" name="password" id="facebook" 
-      placeholder="www.facebook.com/your-username"
-      class="mb-2"
-      ng-model="user.add.facebook"
-      ng-pattern="regex.url" />
-    
-    <p class="error" ng-show="myAccount.instagram.$invalid && myAccount.instagram.$touched">
-      The URL provided to your Facebook account is invalid. Ensure the URL starts with 'www' or 'https'.
-    </p>
-
-    <!-- PASSWORD -->
-    <label for="password">Please verify your password to save your changes</label>
-    <input type="password" name="password" id="password" autocomplete="current-password"
-      placeholder="Verify your password..."
-      class="mb-2"
-      ng-model="password"
-      ng-required="true" />
-    
-    <p class="error" 
-      ng-show="myAccount.password.$error.required && myAccount.password.$touched">
-      Please enter a password.
-    </p>
-    
-    <div class="text-right my-4">
-      <button type="submit">Save Changes</button>
-    </div>
-  </form>
+  </section>
 </div>

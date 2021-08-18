@@ -653,6 +653,19 @@ button:focus {
   --tw-ring-offset-width: 2px;
 }
 
+button:disabled {
+  border-radius: 0.25rem;
+  --tw-bg-opacity: 1;
+  background-color: rgba(243, 244, 246, var(--tw-bg-opacity));
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  font-weight: 600;
+  --tw-text-opacity: 1;
+  color: rgba(0, 0, 0, var(--tw-text-opacity));
+}
+
 a {
   border-bottom-width: 2px;
   --tw-border-opacity: 1;
@@ -32367,6 +32380,12 @@ p {
   font-weight: 600;
   --tw-text-opacity: 1;
   color: rgba(239, 68, 68, var(--tw-text-opacity));
+}
+
+.success-message {
+  font-weight: 600;
+  --tw-text-opacity: 1;
+  color: rgba(16, 185, 129, var(--tw-text-opacity));
 }
 
 .ng-invalid.ng-touched {

@@ -13,15 +13,6 @@ if(!request_is_post()) {
   $filetype = pathinfo($filename, PATHINFO_EXTENSION);
   $location = '../../uploads/';
 
-  //check if upload contains filename
-  if(empty($filename)) {
-    echo json_encode(array(
-      'success' => false, 
-      'error' => 'noimage'
-    ));
-    exit();
-  } 
-
   //check if filetype is allowed
   $allowed_types = array('jpg', 'png', 'jpeg');
   if(!in_array($filetype, $allowed_types, true)) {
@@ -32,15 +23,6 @@ if(!request_is_post()) {
     exit();
   } 
 
-  //check if file contains php 
-  if(file_contains_php($filetemp)) {
-    echo json_encode(array(
-      'success' => false, 
-      'error' => 'generic'
-    ));
-    exit();
-  }
-
   //check if size exceeds 2MB
   if($_FILES['file']['size'] > 2000000 || $_FILES['file']['size'] === 0) {
     echo json_encode(array(
@@ -49,6 +31,15 @@ if(!request_is_post()) {
     ));
     exit();
   }  
+
+  // check if file contains php 
+  if(file_contains_php($filetemp)) {
+    echo json_encode(array(
+      'success' => false, 
+      'error' => 'generic'
+    ));
+    exit();
+  }
 
   //upload image and add to DB
   $userid = $_POST['id'];
@@ -98,6 +89,6 @@ if(!request_is_post()) {
 } else { //no image uploaded 
   echo json_encode(array(
     'success' => false, 
-    'error' => 'generic'
+    'error' => 'noimage'
   ));
 }

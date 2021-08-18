@@ -22,28 +22,39 @@ if(!request_is_post()) {
   if(empty(trim($id))) { 
     echo json_encode([
       'success' => false, 
-      'errors' => 'noid'
+      'error' => 'internal'
     ]);
     exit(); 
   }
 
-  //check if there is a user with email
+  //check if there is a user with ID
   $user = get_account_info('*', 'users', 'id', $id);
   if(!$user) {
     echo json_encode([
       'success' => false, 
-      'errors' => 'noid'
+      'error' => 'internal'
     ]);
 
     exit(); 
-  } 
+  }
+  
+  //check if new email taken
+  $email_taken = get_account_info('*', 'users', 'email', $newEmail);
+  if($email_taken) {
+    echo json_encode([
+      'success' => false, 
+      'error' => 'email'
+    ]);
+
+    exit(); 
+  }
 
   //verify password correct
   $password_check = password_verify($password, $user['password']);
   if(!$password_check) {
     echo json_encode([
       'success' => false, 
-      'errors' => 'incorrect'
+      'error' => 'incorrect'
     ]);
     exit();
   } else { //update DB
@@ -73,12 +84,11 @@ if(!request_is_post()) {
         }
 
         $success = $stmt->execute();
-        // echo json_encode($q);
 
         if($success) { //update success: return userdata to frontend for localstorage
           echo json_encode([
             'success' => true, 
-            'errors' => '',
+            'error' => '',
             'user' => array(
               'id' => $id, 
               'firstname' => $firstname ?? $user['firstname'],
@@ -89,13 +99,13 @@ if(!request_is_post()) {
         } else { // return error
           echo json_encode([
             'success' => false, 
-            'errors' => 'sql'
+            'error' => 'internal'
           ]); 
         }
     } else {
       echo json_encode([
         'success' => false, 
-        'errors' => 'nochange'
+        'error' => 'nochange'
       ]);
     }
   }
