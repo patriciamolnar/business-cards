@@ -51,7 +51,7 @@
   }
 
   .ng-invalid.ng-touched {
-    @apply border-solid border-2 border-red-500; 
+    @apply border-solid border-2 border-red-500 focus:ring-0; 
   }
 
   .sr-only {
