@@ -156,8 +156,8 @@ AccountCtrl.controller('AccountCtrl', function($scope, $rootScope, validationSer
         }
       })
       .then(function(response) {
-        if(response.data.success === true) {
-          $scope.result = response.data;
+        if(response.data.successDetails === true) {
+          $scope.result = response.data; 
           for (const [key, value] of Object.entries($scope.result.user)) {
             $localStorage.user[key] = value; 
           }
