@@ -1,6 +1,6 @@
 <div>
   <div class="my-4 flex gap-2 items-end">
-    <a href="#!/profile/{{$storage.user.id}}" class="border-none">
+    <a href="#!/profile/{{$storage.user.id}}" class="border-none hover:opacity-80">
       <img ng-show="$storage.user.image"
         ng-src="./uploads/{{$storage.user.image}}" 
         alt="Profile Image of {{$storage.user.firstname}} {{$storage.user.lastname}}"
@@ -13,7 +13,23 @@
   <hr /> 
 
   <div class="my-4">
-    <p class="font-semibold">Future features to be added here. </p>
+    <h2 class="font-semibold mb-2">Quick Links</h2>
+    <div class="flex flex-col gap-2">
+      <a href="#!/profile/{{$storage.user.id}}" class="button">Your Profile</a>
+      <a href="#!/profile/{{$storage.user.id}}" class="button">Edit Your Details</a>
+      <a href="#!/profile/{{$storage.user.id}}" class="button">Contact List</a>
+      <a href="#!/profile/{{$storage.user.id}}" class="button">Your Followers</a>
+    </div>
+  </div>
+
+  <hr /> 
+
+  <div class="my-4">
+    <h2 class="font-semibold mb-2">Need Help?</h2>
+    <p class="font-medium">
+      If you discover any errors or have any questions, please email
+      <a href="mailto:info@pmcoding.co.uk">info@pmcoding.co.uk</a>
+    </p>
   </div>
 
 </div>
