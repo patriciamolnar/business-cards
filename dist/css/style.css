@@ -687,6 +687,12 @@ p {
   margin-bottom: 0.75rem;
 }
 
+svg {
+  display: inline;
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
 .container {
   width: 100%;
 }
@@ -32402,6 +32408,17 @@ p {
   height: 1px;
   width: 1px;
   overflow: hidden;
+}
+
+.noborder-link {
+  border-style: none;
+  --tw-text-opacity: 1;
+  color: rgba(124, 58, 237, var(--tw-text-opacity));
+}
+
+.noborder-link:hover {
+  --tw-text-opacity: 1;
+  color: rgba(219, 39, 119, var(--tw-text-opacity));
 }
 
 @media (min-width: 640px) {

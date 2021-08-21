@@ -27,6 +27,10 @@
   p {
     @apply my-3; 
   }
+
+  svg {
+    @apply inline h-6 w-6;  
+  }
 }
 
 @layer utilities {
@@ -52,5 +56,9 @@
 
   .sr-only {
     @apply absolute -left-full w-px h-px top-auto overflow-hidden; 
+  }
+
+  .noborder-link {
+    @apply border-none text-purple-600 hover:text-pink-600; 
   }
 }
