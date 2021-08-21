@@ -62,6 +62,9 @@ myApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $l
         }
       }
     })
+    .when('/privacy', {
+      templateUrl: 'views/privacy.html'
+    })
     .otherwise({
       redirectTo: '/'
     });
@@ -88,7 +91,7 @@ myApp.run(['$rootScope', '$location', function($rootScope, $location) {
   $rootScope.$on('$routeChangeStart', function (event) {
     //protect paths based on whether user is logged in/out
     const protectedPaths = ['/account', '/dashboard', '/contacts', '/followers']; 
-    const publicPaths = ['/login', '/signup'];
+    const publicPaths = ['/login', '/signup', '/'];
 
     const path = $location.path(); //get current path.
 
