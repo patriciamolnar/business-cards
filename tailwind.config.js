@@ -5,7 +5,7 @@ module.exports = {
     extend: {
       fontFamily: {
         'quicksand': ['"Quicksand"', 'sans-serif'],
-        'styleScript': ['"Style Script"', 'sans-serif']
+        'rocksalt': ['"Rock Salt"', 'sans-serif']
       }
     },
   },
