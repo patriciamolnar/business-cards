@@ -23,16 +23,18 @@
 
     <!-- List all contacts -->
     <p class="font-semibold">People, whose contacts you saved: </p>
-    <a ng-repeat="contact in contacts | filter:searchTerm" href="#!/profile/{{contact.id}}" class="block bg-white flex gap-2 border-none my-4 p-1 shadow-md">
-      <img ng-show="contact.image"
-        ng-src="uploads/{{contact.image}}" 
-        alt="Image of {{contact.firstname}} {{contact.lastname}}"
-        class="avatar">
-      <span>
-        <span class="font-semibold">{{contact.firstname}} {{contact.lastname}}</span><br />
-        <span class="font-medium text-sm">{{contact.jobtitle}}</span> <br />
-        <span class="text-xs">{{contact.sector}}</span>
-      </span>
-    </a>
+    <div class="sm:grid sm:grid-cols-2 sm:gap-2 lg:grid-cols-3">
+      <a ng-repeat="contact in contacts | filter:searchTerm" href="#!/profile/{{contact.id}}" class="bg-white flex gap-2 border-none my-4 p-1 shadow-md sm:my-0">
+        <img ng-show="contact.image"
+          ng-src="uploads/{{contact.image}}" 
+          alt="Image of {{contact.firstname}} {{contact.lastname}}"
+          class="avatar">
+        <span>
+          <span class="font-semibold">{{contact.firstname}} {{contact.lastname}}</span><br />
+          <span class="font-medium text-sm">{{contact.jobtitle}}</span> <br />
+          <span class="text-xs">{{contact.sector}}</span>
+        </span>
+      </a>
+    </div>
   </div>
 </div>

@@ -1,5 +1,5 @@
 <div>
-  <div class="my-4 flex gap-2 items-end">
+  <div class="my-4 flex gap-4 items-end">
     <a href="#!/profile/{{$storage.user.id}}" class="border-none hover:opacity-80">
       <img ng-show="$storage.user.image"
         ng-src="./uploads/{{$storage.user.image}}" 
@@ -9,20 +9,22 @@
   </div>
   <hr />
 
-  <search-component></search-component>
-  <hr /> 
+  <div class="sm:grid sm:grid-cols-2 sm:gap-4 md:gap-6 lg:gap-8">
+    <search-component></search-component>
+    <hr class="sm:hidden"/> 
 
-  <div class="my-4">
-    <h2 class="font-semibold mb-2">Quick Links</h2>
-    <div class="flex flex-col gap-2">
-      <a href="#!/profile/{{$storage.user.id}}" class="button">Your Profile</a>
-      <a href="#!/profile/{{$storage.user.id}}" class="button">Edit Your Details</a>
-      <a href="#!/profile/{{$storage.user.id}}" class="button">Contact List</a>
-      <a href="#!/profile/{{$storage.user.id}}" class="button">Your Followers</a>
+    <div class="my-4 order-first">
+      <h2 class="font-semibold mb-2">Quick Links</h2>
+      <div class="flex flex-col gap-2 sm:grid sm:grid-cols-2">
+        <a href="#!/profile/{{$storage.user.id}}" class="button">Your Profile</a>
+        <a href="#!/account" class="button">Edit Details</a>
+        <a href="#!/contacts" class="button">Contact List</a>
+        <a href="#!/followers" class="button">Followers</a>
+      </div>
     </div>
   </div>
 
-  <hr /> 
+  <hr class="sm:hidden"/> 
 
   <div class="my-4">
     <h2 class="font-semibold mb-2">Need Help?</h2>

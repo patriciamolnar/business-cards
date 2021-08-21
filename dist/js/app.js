@@ -79,6 +79,7 @@ myApp.controller('AppCtrl', function($scope, $rootScope, $location, $localStorag
     $localStorage.loggedIn = false; 
     $localStorage.user = {}; 
     $location.path('/'); 
+    $scope.hiddenNav = true; 
   }
 
   $scope.hiddenNav = true; 
