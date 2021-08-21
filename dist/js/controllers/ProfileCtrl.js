@@ -1,6 +1,6 @@
 const ProfileCtrl = angular.module('ProfileCtrl', []);
 
-ProfileCtrl.controller('ProfileCtrl', function($scope, $http, $routeParams, $localStorage, handleResponse, userDetails) {  
+ProfileCtrl.controller('ProfileCtrl', ['$scope', '$http', '$routeParams', '$localStorage', 'handleResponse', 'userDetails', function($scope, $http, $routeParams, $localStorage, handleResponse, userDetails) {  
   //update scope based on response received from $http call in resolve
   handleResponse.handleResponse($scope, userDetails, 'user'); 
   
@@ -51,4 +51,4 @@ ProfileCtrl.controller('ProfileCtrl', function($scope, $http, $routeParams, $loc
       throw error; 
     })
   }
-});
+}]);

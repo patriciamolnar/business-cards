@@ -1,6 +1,6 @@
 const SignupCtrl = angular.module('SignupCtrl', []); 
 
-SignupCtrl.controller('SignupCtrl', function($scope, $http, validationService) {
+SignupCtrl.controller('SignupCtrl', ['$scope', '$http', 'validationService', function($scope, $http, validationService) {
 
   //regexes
   $scope.emailRegex = validationService.getEmailRegex(); 
@@ -31,4 +31,4 @@ SignupCtrl.controller('SignupCtrl', function($scope, $http, validationService) {
       console.log(error); 
     });
   } 
-}); 
+}]); 

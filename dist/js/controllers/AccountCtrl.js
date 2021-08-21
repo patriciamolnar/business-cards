@@ -1,6 +1,6 @@
 const AccountCtrl = angular.module('AccountCtrl', []); 
 
-AccountCtrl.controller('AccountCtrl', function($scope, $rootScope, validationService, $http, $localStorage) {
+AccountCtrl.controller('AccountCtrl', ['$scope', '$rootScope', 'validationService', '$http', '$localStorage', function($scope, $rootScope, validationService, $http, $localStorage) {
   $scope.regex = {
     email: validationService.getEmailRegex(),
     string: validationService.getStringRegex(),
@@ -205,4 +205,4 @@ AccountCtrl.controller('AccountCtrl', function($scope, $rootScope, validationSer
       console.log(error);
     });
   }
-}); 
+}]); 

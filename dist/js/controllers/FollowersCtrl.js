@@ -1,6 +1,6 @@
 const FollowersCtrl = angular.module('FollowersCtrl', []); 
 
-FollowersCtrl.controller('FollowersCtrl', function($scope, $http, $localStorage, handleResponse, followersDetails) {
+FollowersCtrl.controller('FollowersCtrl', ['$scope', '$http', '$localStorage', 'handleResponse', 'followersDetails', function($scope, $http, $localStorage, handleResponse, followersDetails) {
 
   // updating scope from data received from resolve
   handleResponse.handleResponse($scope, followersDetails, 'followers');   
@@ -18,5 +18,5 @@ FollowersCtrl.controller('FollowersCtrl', function($scope, $http, $localStorage,
     .then(response => handleResponse.handleResponse($scope, response, 'followers'))
     .catch(error => console.log(error));
   }
-});
+}]);
 

@@ -1,6 +1,6 @@
 const LoginCtrl = angular.module('LoginCtrl', []); 
 
-LoginCtrl.controller('LoginCtrl', function($scope, $http, $location, $localStorage) {
+LoginCtrl.controller('LoginCtrl', ['$scope', '$http', '$location', '$localStorage', function($scope, $http, $location, $localStorage) {
   
   $scope.loginCredentials = {
     email: '', 
@@ -38,4 +38,4 @@ LoginCtrl.controller('LoginCtrl', function($scope, $http, $location, $localStora
       throw error;
     });
   }
-}); 
+}]); 

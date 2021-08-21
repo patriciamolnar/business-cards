@@ -70,7 +70,7 @@ myApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $l
     });
 }]);
 
-myApp.controller('AppCtrl', function($scope, $rootScope, $location, $localStorage) {
+myApp.controller('AppCtrl', ['$scope', '$rootScope', '$location', '$localStorage', function($scope, $rootScope, $location, $localStorage) {
   $rootScope.$storage = $localStorage; 
   
   $localStorage.loggedIn = $localStorage.loggedIn ?? false; 
@@ -86,7 +86,7 @@ myApp.controller('AppCtrl', function($scope, $rootScope, $location, $localStorag
   $scope.showHideNav = function() {
     $scope.hiddenNav = !$scope.hiddenNav; 
   }
-}); 
+}]); 
 
 myApp.run(['$rootScope', '$location', function($rootScope, $location) {
   $rootScope.$on('$routeChangeStart', function (event) {

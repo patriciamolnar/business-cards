@@ -1,6 +1,6 @@
 const SearchCtrl = angular.module('SearchCtrl', []); 
 
-SearchCtrl.controller('SearchCtrl', function($scope, $http, handleResponse) {
+SearchCtrl.controller('SearchCtrl', ['$scope', '$http', 'handleResponse', function($scope, $http, handleResponse) {
   $scope.searchTerm = ''; 
 
   $scope.searchUser = function() {
@@ -20,4 +20,4 @@ SearchCtrl.controller('SearchCtrl', function($scope, $http, handleResponse) {
     $scope.user = null; 
     $scope.error = null; 
   }
-}); 
+}]); 
