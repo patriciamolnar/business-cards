@@ -9,13 +9,13 @@ SignupCtrl.controller('SignupCtrl', function($scope, $http, validationService) {
 
   //data for signup
   $scope.user = {
-    firstname: '', 
-    lastname: '',
-    email: '', 
-    password: ''
+    firstname: null, 
+    lastname: null,
+    email: null, 
+    password: null
   }
 
-  $scope.result = '';
+  $scope.result = null;
 
   //send data to PHP file 
   $scope.registerUser = function() {
@@ -26,13 +26,9 @@ SignupCtrl.controller('SignupCtrl', function($scope, $http, validationService) {
     })
     .then(function(response) {
       $scope.result = response.data; 
-      console.log($scope.result);
-      return response.data;
     })
     .catch(function(error) {
-      $scope.status = error.status; 
-      console.log($scope.status);
-      throw error;
+      console.log(error); 
     });
-  }
+  } 
 }); 

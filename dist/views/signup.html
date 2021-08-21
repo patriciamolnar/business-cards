@@ -1,15 +1,27 @@
 <div>
   <h1 class="font-semibold text-purple-600 text-xl mt-4 mb-2">Create an account</h1>
 
-  <p ng-show="result.errors.includes('taken')">
-    Your email has already been taken. Please <a href="#!/login">login</a> to continue. 
+  <p ng-show="result.errors.includes('taken')" class="error">
+    Your email has already been taken. Please <a href="#!/login" class="text-red-500 border-red-500 hover:text-red-400 hover:border-red-400">login</a> to continue. 
   </p>
 
-  <p ng-show="result.success === true">
-    Success! Please <a href="#!/login">login</a>.
+  <p ng-show="result.errors.includes('firstname') || result.errors.includes('lastname')" class="error">
+    The provided name is invalid. It must be at least 2 characters long and can only contain letters and following characters ,.'-.
   </p>
 
-  <form name="mySignup" ng-submit="registerUser()" novalidate>
+  <p ng-show="result.errors.includes('email')" class="error">
+    The provided email is incorrect.
+  </p>
+
+  <p ng-show="result.errors.includes('password')" class="error">
+    The provided password is invalid. 
+  </p>
+
+  <p ng-show="result.success === true" class="success-message">
+    Success! Please <a href="#!/login" class="text-green-500 border-green-500 hover:text-green-800 hover:border-green-800">login</a>.
+  </p>
+
+  <form name="mySignup" ng-submit="registerUser()" ng-hide="result.success" novalidate>
     <fieldset>
       <!-- FIRSTNAME -->
       <label for="signup-first">First Name *</label>
@@ -37,8 +49,7 @@
       <!-- error: firstname has invalid chars -->
       <p class="error"
         ng-show="mySignup.firstname.$error.pattern 
-          && mySignup.firstname.$touched
-          || result.errors.includes('firstname')">
+          && mySignup.firstname.$touched">
         The first name you entered is invalid.  
       </p>
 
@@ -68,8 +79,7 @@
       <!-- error: lastname has invalid chars -->
       <p class="error"
         ng-show="mySignup.lastname.$error.pattern 
-          && mySignup.lastname.$touched
-          || result.errors.includes('lastname')">
+          && mySignup.lastname.$touched">
         The last name you entered is invalid.  
       </p>
 
@@ -91,8 +101,7 @@
       <!-- email incorrect format -->
       <p class="error"
         ng-show="mySignup.email.$error.pattern 
-          && mySignup.email.$touched
-          || result.errors.includes('email')">
+          && mySignup.email.$touched">
         The email you provided is not valid.
       </p>
 
@@ -114,14 +123,12 @@
       <!-- password invalid-->
       <p class="error"
         ng-show="mySignup.password.$error.pattern 
-          && mySignup.password.$touched
-          || result.errors.includes('password')">
+          && mySignup.password.$touched">
         Please enter a valid password. <br /> 
         Passwords need to: 
-        <ul 
+        <ul class="error list-disc pl-4"
           ng-show="mySignup.password.$error.pattern 
-            && mySignup.password.$touched
-            || result.errors.includes('password')">
+            && mySignup.password.$touched">
           <li>Be at least 8 characters long.</li>
           <li>Contain at least 1 uppercase character.</li>
           <li>Contain at least 1 lowercase character.</li>
@@ -131,7 +138,7 @@
       </p>
     </fieldset>
     <div class="text-right mt-2">
-      <button type="submit">Sign Up</button>
+      <button type="submit" ng-disabled="mySignup.$invalid">Sign Up</button>
     </div>
   </form>
 </div>
